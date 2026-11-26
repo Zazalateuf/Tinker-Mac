@@ -1,6 +1,8 @@
 #include "nodes/FontContainer.hpp"
 #include "modules/ImprovedFontSelection.hpp"
 
+#include "utils/MacCompat.hpp"
+
 using namespace geode::prelude;
 
 namespace tinker::ui {
@@ -40,7 +42,7 @@ bool FontContainer::init(int id, float width, ZStringView text, ZStringView font
     });
     m_toggle->setID("use-toggle"_spr);
 
-    if (static_cast<IFSSelectFontLayer2*>(fontLayer)->m_fields->m_font == id) {
+    if (tinker::utils::compat::nodeFields<IFSSelectFontLayer2::Fields>(static_cast<IFSSelectFontLayer2*>(fontLayer))->m_font == id) {
         m_toggle->toggle(true);
     }
 
