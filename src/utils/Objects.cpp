@@ -1,4 +1,5 @@
 #include "utils/Objects.hpp"
+#include "utils/MacCompat.hpp"
 #include <Geode/binding/EditorUI.hpp>
 #include <Geode/cocos/cocoa/CCGeometry.h>
 #include <Geode/cocos/sprite_nodes/CCSprite.h>
@@ -546,7 +547,7 @@ void moveCameraToPos(cocos2d::CCPoint position, bool showCircle) {
     if (showCircle) {
         auto pos = editor->m_objectLayer->convertToWorldSpace(position);
 
-        editor->m_editorUI->playCircleAnim(pos, 50.f, 0.8f);
+        tinker::utils::compat::playCircleAnim(editor->m_editorUI, pos, 50.f, 0.8f);
         editor->m_editorUI->updateSlider();
     }
 }
