@@ -85,7 +85,9 @@ class $modify(ICGJScaleControl, GJScaleControl) {
 
     float trueScaleFromValue(float value);
     float trueValueFromScale(float scale);
+#ifndef GEODE_IS_MACOS
     void onApplyScale(cocos2d::CCObject* sender);
+#endif
     void loadValues(GameObject* obj, cocos2d::CCArray* objs, std::unordered_map<int, GameObjectEditorState>& states);
     void unfocus();
     void setBypass(bool bypass);
