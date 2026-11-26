@@ -1,0 +1,57 @@
+#pragma once
+
+#include "module/Module.hpp"
+#include <Geode/modify/SetGroupIDLayer.hpp>
+#include <Geode/modify/EditorUI.hpp>
+#include <Geode/modify/LevelEditorLayer.hpp>
+#include <Geode/modify/EditorPauseLayer.hpp>
+#include <alphalaneous.good_grid/DrawLayers.hpp>
+#include "nodes/DurationControl.hpp"
+
+namespace tinker::ui {
+
+class DurationDragDraw : public alpha::grid::DrawGridBase {
+public:
+    static DurationDragDraw* create();
+
+	void drawDottedLine(const cocos2d::CCPoint& start, const cocos2d::CCPoint& end, const alpha::grid::Color& color, const cocos2d::CCRect& visibleRect);
+	void draw(const cocos2d::CCRect& visibleRect);
+};
+
+}
+
+class $module(DurationDrag) {
+    tinker::ui::DurationControl* m_durationControl = nullptr;
+    tinker::ui::DurationDragDraw* m_durationDragDraw = nullptr;
+
+    bool onToggled(bool state);
+    void onEditor();
+	void updateObjects();
+};
+
+class $modify(DDSetGroupIDLayer, SetGroupIDLayer) {
+    $registerHooks(DurationDrag)
+
+    void onClose(cocos2d::CCObject* sender);
+};
+
+class $modify(DDEditorUI, EditorUI) {
+    $registerHooks(DurationDrag)
+
+    void deselectAll();
+    void deselectObject(GameObject* object);
+    void selectObject(GameObject* object, bool ignoreFilter);
+    void selectObjects(cocos2d::CCArray* objects, bool ignoreFilter);
+};
+
+class $modify(DDLevelEditorLayer, LevelEditorLayer) {
+    $registerHooks(DurationDrag)
+
+    void removeObject(GameObject* object, bool noUndo);
+};
+
+class $modify(DDEditorPauseLayer, EditorPauseLayer) {
+    $registerHooks(DurationDrag)
+
+    void onResume(cocos2d::CCObject* sender);
+};

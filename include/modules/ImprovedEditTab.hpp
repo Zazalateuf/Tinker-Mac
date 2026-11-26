@@ -1,0 +1,119 @@
+#pragma once
+
+#include <alphalaneous.alphas-ui-pack/API.hpp>
+#include "module/Module.hpp"
+#include <Geode/modify/EditorUI.hpp>
+#include <Geode/modify/EditButtonBar.hpp>
+
+/*namespace tinker::ui {
+
+class ButtonContainer : public geode::NineSlice, public alpha::dispatcher::TouchDelegate {
+public:
+    static ButtonContainer* create();
+
+    void hide();
+    void show();
+    void setContentSize(cocos2d::CCSize const& size) override;
+
+protected:
+    bool init() override;
+
+    void onEnter() override;
+    void onExit() override;
+
+	bool touchBegan(alpha::dispatcher::Touch* touch) override;
+
+    bool m_active = false;
+    geode::Button* m_showButton = nullptr;
+    geode::Ref<cocos2d::CCAction> m_buttonAction = nullptr;
+    geode::Ref<cocos2d::CCAction> m_moveAction = nullptr;
+
+    static constexpr float Offset = 50.f;
+};
+
+class EditControls : public cocos2d::CCLayer {
+public:
+ // I eventually want to add an API
+    enum class Direction {
+        Up,
+        Down,
+        Left,
+        Right
+    };
+
+    using OnDirection = geode::Function<void(Direction direction)>;
+    using CreateSprite = geode::Function<cocos2d::CCSprite*(Direction direction)>;
+
+    struct MoveControl {
+        std::string id = "";
+        std::string label = "";
+        float dist = 0.f;
+        CreateSprite createSprite = nullptr;
+        OnDirection onDirection = nullptr; 
+    };
+
+    static EditControls* create(cocos2d::CCArray* buttons, const cocos2d::CCSize& size);
+    bool controlActive();
+    float getCurrentDist();
+    Direction getCurrentDirection();
+
+    void enableButton(geode::ZStringView ID, bool enable);
+    void setButtonBG(geode::ZStringView ID, geode::ZStringView bgID);
+    void updateButtons();
+    
+protected:
+    bool init(cocos2d::CCArray* buttons, const cocos2d::CCSize& size);
+
+    geode::Button* createGButton(geode::ZStringView sprite, geode::ZStringView ID, float scale, geode::Function<void(geode::Button* sender)> callback, bool withBG);
+    CCMenuItemSpriteExtra* createButton(geode::ZStringView sprite, geode::ZStringView ID, float scale, const cocos2d::CCPoint& offset, geode::Function<void(CCMenuItemSpriteExtra* sender)> callback, bool repeat, bool scaleBG);
+    CCMenuItemSpriteExtra* createArrowButton(geode::ZStringView sprite, geode::ZStringView ID, Direction direction);
+
+    std::vector<MoveControl> m_controls{};
+    geode::utils::StringMap<CCMenuItemSpriteExtra*> m_buttons{};
+    
+    float m_moveDist = 30.f;
+    float m_moveMod = 1.f;
+
+    float m_curDist = 0.f;
+    bool m_active = false;
+    Direction m_currentDirection = Direction::Up;
+    geode::ZStringView m_activeID;
+    CCNode* m_valueContainer = nullptr;
+
+    ButtonContainer* m_buttonContainer = nullptr;
+};
+
+}
+
+class $module(ImprovedEditTab) {
+    bool onToggled(bool state);
+
+    void onEditor();
+    float getOffset();
+
+    bool controlActive();
+    float getCurrentDist();
+    tinker::ui::EditControls::Direction getCurrentDirection();
+
+    void updateButtons();
+
+    geode::Ref<tinker::ui::EditControls> m_customEditContainer = nullptr;
+};
+
+class $modify(IETEditorUI, EditorUI) {
+    $registerHooks(ImprovedEditTab)
+
+    cocos2d::CCPoint moveForCommand(EditCommand command);
+    void updateButtons();
+};
+
+class $modify(IETEditButtonBar, EditButtonBar) {
+    $registerHooks(ImprovedEditTab, true)
+
+    void removeOldButtons(cocos2d::CCArray* objects);
+    void loadFromItems(cocos2d::CCArray* objects, int cols, int rows, bool keepPage);
+
+    static void _onModify(auto& self) {
+        (void) self.setHookPriorityAfterPost("EditButtonBar::loadFromItems", "alphalaneous.editortab_api");
+    }
+};*/
