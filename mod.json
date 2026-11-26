@@ -1,0 +1,1420 @@
+{
+	"geode": "6.0.0-beta.3",
+	"gd": {
+		"win": "2.2091",
+		"android": "2.2091",
+		"mac": "2.2091",
+		"ios": "2.2091"
+	},
+	"id": "alphalaneous.tinker",
+	"name": "Tinker",
+	"version": "v1.2.0-beta.9",
+	"developer": "Alphalaneous",
+	"description": "Editor Revamped",
+	"dependencies": {
+		"geode.node-ids": "v1.24.0-beta.1",
+		"alphalaneous.good_grid": "v2.0.0-beta.1",
+		"alphalaneous.alphas_geode_utils": "v1.3.0-beta.1",
+		"alphalaneous.alphas-ui-pack": "v1.5.0-beta.1",
+		"alphalaneous.editortab_api": "v3.0.0-beta.1",
+		"alphalaneous.level-storage-api": "v1.1.0-beta.1",
+		"alphalaneous.editor-touch-api": "v1.0.0-beta.1",
+		"prevter.imageplus": "v1.1.1",
+		"razoom.object_groups": {
+			"version": "v2.1.9",
+			"required": false
+		},
+		"smjs.object-collab": {
+			"version": "v0.5.4-beta.1",
+			"required": false
+		},
+		"alphalaneous.editorsounds": {
+			"version": "v1.3.0",
+			"required": false
+		},
+		"geode.devtools": {
+			"version": "v1.14.0",
+			"required": false
+		}
+	},
+	"incompatibilities": {
+		"hjfod.betteredit": ">=v6.0.0"
+	},
+	"resources": {
+		"sprites": [
+			"resources/*.png"
+		],
+		"files": [
+			"resources/*.gif",
+			"resources/objects.csv"
+		]
+	},
+	"links": {
+		"homepage": "https://linktr.ee/Alphalaneous",
+		"source": "https://github.com/Alphalaneous/Tinker"
+	},
+	"tags": [
+		"editor", "utility", "offline", "enhancement", "interface", "bugfix", "customization"
+	],
+	"settings": {
+		"interface-title": {
+			"type": "title",
+			"name": "Interface"
+		},
+		"interface-description": {
+			"type": "info",
+			"description": "Customize different aspects of the editor's interface.",
+			"color": "#000000"
+		},
+		"DisableSaveConfirmation-enabled": {
+			"type": "bool",
+			"default": false,
+			"name": "Disable Save Confirmation Popup",
+			"description": "Disable save confirmation popup when saving in the pause menu. Instead it will just save."
+		},
+		"HideTriggerUI-enabled": {
+			"type": "bool",
+			"default": false,
+			"name": "Slider Hides Trigger UI",
+			"description": "Dragging any slider in any trigger hides the trigger UI.",
+			"enable-if": "!loaded:ninkaz.editor_utils",
+			"enable-if-description": "This feature is not compatible with Ninkaz's Editor Utils."
+		},
+		"AdvancedGridControls-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enable Advanced Grid Controls",
+			"description": "Control X and Y sizes of the grid as well as placing objects relative to the grid scale.",
+			"enable-if": "saved:wip-features",
+			"enable-if-description": "This feature is not complete yet and is coming in a future update."
+		},
+		"ImprovedFontSelection-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enable Improved Font Selection",
+			"description": "Show fonts in a scrollable view and preview text with them."
+		},
+		"ImprovedLayers-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enable Improved Editor Layer Controls",
+			"description": "Add an editor layer text input, redesign layer locking, and add a next free layer arrow."
+		},
+		"ImprovedArtPicker-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enable Improved Style Picker",
+			"description": "Show backgrounds, grounds, and middlegrounds in one popup with a preview of what you have selected."
+		},
+		"ImprovedNotifications-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enable Animated Notifications",
+			"description": "Show a animated notification popup on the top center instead of a green one on the top left."
+		},
+		"LDMObjectCount-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "LDM Object Count",
+			"description": "Show the total objects marked as high detail next to the total object count."
+		},
+		"LengthInEditor-enabled": {
+			"type": "bool",
+			"default": false,
+			"name": "Show Length In Editor",
+			"description": "Show the levels' length in time in the top left corner."
+		},
+		"LiveColors-enabled": {
+			"type": "bool",
+			"default": false,
+			"name": "Enable Live Colors",
+			"description": "Show the levels' currently active colors on the bottom of the screen."
+		},
+		"MixedEditExtras-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Mixed Exit Extra Toggles",
+			"description": "Color the Edit Extra toggles to signify that they are not the same across the selected objects."
+		},
+		"PreviewObjectColors-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Preview Object Colors",
+			"description": "Preview a color channel on the object buttons in the build tab."
+		},
+		"ReferenceImage-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enable Reference Image",
+			"description": "A button to import reference images into a level."
+		},
+		"SlopeDirectionIndicators-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enable Slope Direction Indicators",
+			"description": "Show the front and back of slopes when selected to assist with not inverting slopes."
+		},
+		"StatusBar-enabled": {
+			"type": "bool",
+			"default": false,
+			"name": "Show Status Bar",
+			"description": "Show extra editor info in a status bar at the bottom. Only shows if the toolbar UI Scale is at 0.9 or below."
+		},
+		"TogglerOverflow-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enable Toggler Overflow Menu",
+			"description": "If there are more than 4 togglers shown in the bottom right menu, hide them and show extras in an overflow menu instead."
+		},
+		"scrolling-title": {
+			"type": "title",
+			"name": "Scrolling"
+		},
+		"scrolling-description": {
+			"type": "info",
+			"description": "How scrolling and zooming with your mouse feels in the editor.",
+			"color": "#000000"
+		},
+		"smooth-scroll-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enable Smooth Scroll",
+			"description": "Make scrolling and zooming in the editor smoother."
+		},
+		"zoom-to-cursor": {
+			"type": "bool",
+			"default": true,
+			"name": "Enable Zoom to Cursor",
+			"description": "Make scroll wheel zooming based on the cursor position."
+		},
+		"zoom-minimum": {
+			"type": "float",
+			"default": 0.1,
+			"name": "Minimum Scroll Zoom",
+			"description": "How far you can zoom out when scrolling.",
+			"min": 0.005,
+			"max": 2
+		},
+		"zoom-maximum": {
+			"type": "float",
+			"default": 1000,
+			"name": "Maximum Scroll Zoom",
+			"description": "How far you can zoom in when scrolling.",
+			"min": 2,
+			"max": 10000
+		},
+		"pinch-to-zoom": {
+			"type": "bool",
+			"default": true,
+			"name": "Pinch to Zoom",
+			"description": "Allow pinching 2 fingers to zoom.",
+			"platforms": ["android", "ios"]
+		},
+		"ignore-natural-scrolling": {
+			"type": "bool",
+			"default": true,
+			"name": "Ignore Natural Scroll Setting",
+			"description": "Ignore MacOS natural scrolling setting.",
+			"platforms": ["mac"]
+		},
+		"invert-vertical-scroll": {
+			"type": "bool",
+			"default": false,
+			"name": "Invert Vertical Scroll",
+			"description": "Scroll wheel goes the opposite direction vertically."
+		},
+		"invert-horizontal-scroll": {
+			"type": "bool",
+			"default": false,
+			"name": "Invert Horizontal Scroll",
+			"description": "Scroll wheel goes the opposite direction horizontally."
+		},
+		"invert-zoom-scroll": {
+			"type": "bool",
+			"default": false,
+			"name": "Invert Zoom Scroll",
+			"description": "Scroll wheel zooming goes the opposite direction."
+		},
+		"scroll-multiplier": {
+			"type": "float",
+			"default": 12,
+			"name": "Scroll Multiplier",
+			"description": "How fast the scrolling is.",
+			"min": 1,
+			"max": 50
+		},
+		"zoom-multiplier": {
+			"type": "float",
+			"default": 12,
+			"name": "Zoom Multiplier",
+			"description": "How fast zooming is.",
+			"min": 1,
+			"max": 50
+		},
+		"objects-title": {
+			"type": "title",
+			"name": "Objects"
+		},
+		"objects-description": {
+			"type": "info",
+			"description": "All things related to objects.",
+			"color": "#000000"
+		},
+		"DurationDrag-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enable Duration Dragging",
+			"description": "Drag on a duration line to change the duration without going into a trigger's edit menu.",
+			"enable-if": "!loaded:undefined0.bendy_duration_lines",
+			"enable-if-description": "This feature is not compatible with Bendy Duration Lines."
+		},
+		"MoreAttributes-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enable More Attributes",
+			"description": "Edit Keyframe IDs, Link IDs, Ignore GParent and Ignore linked for Advanced Follow, and Remap Bugfix for Instant Collision."
+		},
+		"MultiTextEdit-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enable Multi Text Edit",
+			"description": "Edit multiple text objects at once."
+		},
+		"ObjectSummary-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enable Object Summary",
+			"description": "Add a button in the level settings to view how many of each object there are."
+		},
+		"OldColorTriggers-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enable Old Color Trigger Textures",
+			"description": "See the old color trigger textures when looking at old levels."
+		},
+		"fixes-title": {
+			"type": "title",
+			"name": "Fixes"
+		},
+		"fixes-description": {
+			"type": "info",
+			"description": "Different fixes that you'll likely want to keep on to improve the editing experience.",
+			"color": "#000000"
+		},
+		"AddToSectionCrashFix-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "NaN/Infinity crash fix",
+			"description": "Fixes a vanilla crash when objects are positioned at NaN or Infinity."
+		},
+		"CenteredObjectButtons-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Centered Object Buttons",
+			"description": "Make the object sprites on the buttons in the build tab actually centered."
+		},
+		"CenteredToggles-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Centered Toggles",
+			"description": "Make the sprites on the bottom right toggles actually centered."
+		},
+		"EditorSliderFix-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Editor Slider Fix",
+			"description": "Fix the position slider not being based on level length."
+		},
+		"EditorTouchFix-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Editor Touch Fix",
+			"description": "Fix editor touch not working if you are dragging while pressing playtest."
+		},
+		"FixToggleTriggerVisibility-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Toggle Trigger Visibility Fix",
+			"description": "Fix toggle trigger opacity being broken, not allowing them to be hidden properly."
+		},
+		"ImprovedLinkControls-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Fix Link Controls",
+			"description": "Fix the link control buttons being clickable when toggled off."
+		},
+		"FixLinkedTeleport-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Orange Linked Teleport Portal Fixes",
+			"description": "Fix orange linked teleport portals not behaving sane in the editor."
+		},
+		"FixSlopeHitboxRender-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Slope Orientation Fix",
+			"description": "Fix slope hitboxes not rendering properly when rotating them and template slopes not placing at the right orientation."
+		},
+		"FixHeadHitting-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Head hitting (breakable blocks) fix",
+			"description": "Fixes a vanilla bug where you can hit your head on anything after changing gravity in a session, this also broke breakable blocks."
+		},
+		"NoTouchPasteStateFix-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "No Touch Paste State Fix",
+			"description": "Fix No Touch not working when pasting state until reopening the editor."
+		},
+		"SelectionFix-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Selection Fix",
+			"description": "Fix very large objects not being selectable past a certain point."
+		},
+		"ShakeTriggerFix-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Shake Trigger Fix",
+			"description": "Fix shake triggers not working in the editor."
+		},
+		"StartPosBlendingFix-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Start Pos Blending Fix",
+			"description": "Fix blending set before a start position via color triggers not working."
+		},
+		"TransformFix-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Warp Control Fix",
+			"description": "Fix the button scale and position issues with Warp controls."
+		},
+		"FixIgnoreDamage-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Wave in Ignore Damage Fix",
+			"description": "Fix wave sliding on slopes instead of clipping through them when ignore damage is enabled."
+		},
+		"FixTextObjectBounds-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Text Object Transform Fix",
+			"description": "Fix the transform bounds for text objects such that they are not always {0, 0}. Updates them properly when the text and/or kerning is changed."
+		},
+		"ZoomGroundFix-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Zoom Ground Position Fix",
+			"description": "Fix the ground position not properly updating when you zoom."
+		},
+		"misc-title": {
+			"type": "title",
+			"name": "Miscellaneous"
+		},
+		"misc-description": {
+			"type": "info",
+			"description": "Stuff that just doesn't fit in any other category.",
+			"color": "#000000"
+		},
+		"ButtonRowsBypass-enabled": {
+			"type": "bool",
+			"default": false,
+			"name": "Button Rows Bypass",
+			"description": "Bypass the 3x12 Button Grid settings."
+		},
+		"CopyObjectString-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Copy Object String",
+			"description": "Copy object string to clipboard when copying in the editor."
+		},
+		"Gizmos-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enable Editor Gizmos",
+			"description": "Add special interactive editor only objects.",
+			"enable-if": "saved:wip-features",
+			"enable-if-description": "This feature is not complete yet and is coming in a future update."
+		},
+		"hIDe-enabled": {
+			"type": "bool",
+			"default": false,
+			"name": "Hide IDs in the Edit Level screen",
+			"description": "Hide IDs in Edit Level screen, hold shift to show them."
+		},
+		"LazyLoadedObjectButtons-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Lazy Loaded Object Buttons",
+			"description": "Load the object buttons only when they are made visible. Improves editor load times.",
+			"enable-if": "saved:wip-features",
+			"enable-if-description": "This feature is not complete yet and is coming in a future update."
+		},
+		"MusicCameraLock-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Music Camera Lock Button",
+			"description": "Lock the camera to the music line when playback is active with a toggle."
+		},
+		"PlaytestConfirmation-enabled": {
+			"type": "bool",
+			"default": false,
+			"name": "Playtest Confirmation Popup",
+			"description": "Show an alert asking if you want to playtest when you click the playtest button."
+		},
+		"stop-swipe-on-shift-release": {
+			"type": "bool",
+			"default": true,
+			"name": "Stop Swipe on Shift Release",
+			"description": "Stops swiping when shift is released before clicking is released."
+		},
+		"other-mods-title": {
+			"type": "title",
+			"name": "Other Mods"
+		},
+		"other-mods-description": {
+			"type": "info",
+			"description": "Changes Tinker can make to better integrate other mods with Tinker itself.",
+			"color": "#000000"
+		},
+		"AlternateLassoLocation-enabled": {
+			"type": "bool",
+			"name": "Alternate Lasso Select Location",
+			"description": "Move the Lasso Select button to the bottom right.",
+			"default": true,
+			"enable-if": "loaded:undefined0.lasso-select",
+			"enable-if-description": "This feature requires the Lasso Select mod."
+		},
+		"AutoBuildHelper-title": {
+			"type": "title",
+			"name": "Auto \"Build Helper\""
+		},
+		"AutoBuildHelper-description": {
+			"type": "info",
+			"description": "Add a toggle to automate the Build Helper tool. Copy and paste objects and/or place custom objects to automatically run Build Helper on them when the toggle is on.",
+			"color": "#000000"
+		},
+		"AutoBuildHelper-enabled": {
+			"type": "bool",
+			"default": false,
+			"name": "Enabled",
+			"enable-if": "!loaded:alk.editor-collab",
+			"enable-if-description": "This feature is not compatible with Editor Collab."
+		},
+		"AutoBuildHelper-show-on-pause": {
+			"name": "Show on Editor Pause",
+			"description": "Show the auto build helper toggle on editor pause rather than in the editor.",
+			"type": "bool",
+			"default": false
+		},
+		"AwesomeModifierIcons-title": {
+			"type": "title",
+			"name": "Modifier Icons"
+		},
+		"AwesomeModifierIcons-description": {
+			"type": "info",
+			"description": "Improve the Modifier blocks (D/H/J/S/F) by adding icons for each of their actions instead of the letter.",
+			"color": "#000000"
+		},
+		"AwesomeModifierIcons-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enabled"
+		},
+		"AwesomeModifierIcons-solid-border": {
+			"name": "Solid Border",
+			"description": "Make the border of the blocks solid instead of dotted.",
+			"type": "bool",
+			"default": false
+		},
+		"AwesomeModifierIcons-show-letter": {
+			"name": "Show Letters",
+			"description": "Show the letters instead of hiding them.",
+			"type": "bool",
+			"default": false
+		},
+		"CanvasRotate-title": {
+			"type": "title",
+			"name": "Editor Rotation"
+		},
+		"CanvasRotate-description": {
+			"type": "info",
+			"description": "Allows the editor to rotate freely. Either with right clicking and dragging or with the Joystick. Also fixes panning while the editor is rotated during playtest.",
+			"color": "#000000"
+		},
+		"CanvasRotate-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enabled"
+		},
+		"CanvasRotate-rotate-slider-thumb": {
+			"type": "bool",
+			"default": true,
+			"name": "Rotate Slider Thumb",
+			"description": "Rotate the slider thumb according to the editor rotation, such that left and right always points left and right."
+		},
+		"CanvasRotate-use-modifier": {
+			"type": "bool",
+			"default": true,
+			"name": "Enable Right Click Dragging"
+		},
+		"CanvasRotate-pinch-to-rotate": {
+			"type": "bool",
+			"default": false,
+			"name": "Pinch to Rotate",
+			"description": "Allow pinching and rotating 2 fingers to rotate the editor.",
+			"platforms": ["android", "ios"],
+			"enable-if": "pinch-to-zoom"
+		},
+		"CanvasRotate-align-modifier": {
+			"name": "Rotate Align Modifier",
+			"description": "Align placed objects to your exact camera rotation when held.",
+			"type": "keybind",
+			"default": ["]"],
+			"category": "editor"
+		},
+		"CanvasRotate-reset-rotation-keybind": {
+			"name": "Reset Rotation Keybind",
+			"description": "Reset editor rotation back to 0 degrees.",
+			"type": "keybind",
+			"default": ["Alt+'"],
+			"category": "editor"
+		},
+		"CustomToolbarBackground-title": {
+			"type": "title",
+			"name": "Toolbar Background"
+		},
+		"CustomToolbarBackground-description": {
+			"type": "info",
+			"description": "Customize the toolbar's background colors.",
+			"color": "#000000"
+		},
+		"CustomToolbarBackground-enabled": {
+			"type": "bool",
+			"default": false,
+			"name": "Enabled"
+		},
+		"CustomToolbarBackground-blur-behind": {
+			"type": "bool",
+			"default": false,
+			"name": "Blur Behind",
+			"enable-if": "loaded:thesillydoggo.blur-api",
+			"enable-if-description": "This feature requires the Blur API mod."
+		},
+		"CustomToolbarBackground-gradient-start-color": {
+			"type": "rgba",
+			"default": [16, 12, 13, 200],
+			"name": "Gradient Start Color"
+		},
+		"CustomToolbarBackground-gradient-end-color": {
+			"type": "rgba",
+			"default": [31, 31, 31, 200],
+			"name": "Gradient End Color"
+		},
+		"CustomToolbarBackground-line-color": {
+			"type": "rgba",
+			"default": [91, 92, 92, 200],
+			"name": "Line Color"
+		},
+		"EditTools-title": {
+			"type": "title",
+			"name": "Extra Edit Tab Tools"
+		},
+		"EditTools-description": {
+			"type": "info",
+			"description": "Misc edit tools for the edit tab to make editing easier.",
+			"color": "#000000"
+		},
+		"EditTools-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enabled"
+		},
+		"EditTools-camera-to-object-keybind": {
+			"name": "Camera to Object Keybind",
+			"description": "Keybind to move the camera to the selected objects.",
+			"type": "keybind",
+			"default": ["N"],
+			"category": "editor"
+		},
+		"EditTools-object-to-camera-keybind": {
+			"name": "Object to Camera Keybind",
+			"description": "Keybind to move selected objects to the center of the camera.",
+			"type": "keybind",
+			"default": ["M"],
+			"category": "editor"
+		},
+		"ImprovedColorPicker-title": {
+			"type": "title",
+			"name": "Improved Color Picker"
+		},
+		"ImprovedColorPicker-description": {
+			"type": "info",
+			"description": "Improve the Color Selection UI by showing more colors, special colors, and recent colors.",
+			"color": "#000000"
+		},
+		"ImprovedColorPicker-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enabled"
+		},
+		"ImprovedColorPicker-compact-ui": {
+			"type": "bool",
+			"name": "Compact UI",
+			"description": "Make the Color Buttons smaller.",
+			"default": {
+				"win": true,
+				"mac": true,
+				"android": false,
+				"ios": false
+			}
+		},
+		"ImprovedColorPicker-show-copy-color": {
+			"type": "bool",
+			"name": "Show Copy Color",
+			"description": "Show the copy color instead of grey.",
+			"default": true
+		},
+		"ImprovedColorPicker-out-of-range-ids": {
+			"type": "bool",
+			"name": "Out of Range IDs",
+			"description": "Allow inputting color IDs below 1 and above 999.",
+			"default": false
+		},
+		"ImprovedControls-title": {
+			"type": "title",
+			"name": "Improved Scale and Rotate Controls"
+		},
+		"ImprovedControls-description": {
+			"type": "info",
+			"description": "Add snapping and position locking to scale and rotate controls.",
+			"color": "#000000"
+		},
+		"ImprovedControls-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enabled"
+		},
+		"ImprovedControls-use-refresh-button": {
+			"type": "bool",
+			"default": false,
+			"name": "Use refresh button",
+			"description": "Show a refresh button that sets the value rather than the value updating live when typing in an input."
+		},
+		"ImprovedControls-follow-ui-scale": {
+			"type": "bool",
+			"default": true,
+			"name": "Follow UI Scale"
+		},
+		"ImprovedControls-control-scale": {
+			"type": "float",
+			"default": 1,
+			"name": "Control Scale",
+			"description": "The UI scale of the scale and rotate controls. If \"Follow UI Scale\" is enabled, it will be relative to that.",
+			"min": 0.1,
+			"max": 2,
+			"control": {
+				"arrows": false
+			}
+		},
+		"ImprovedControls-scale-with-zoom": {
+			"type": "bool",
+			"default": true,
+			"name": "Scale Controls scale with Zoom"
+		},
+		"ImprovedControls-slider-bypass": {
+			"type": "bool",
+			"default": true,
+			"name": "Scale Slider Bypass"
+		},
+		"ImprovedControls-custom-scale-min-max": {
+			"type": "bool",
+			"default": false,
+			"name": "Custom Scale Min and Max",
+			"description": "Allow custom minimum and maximum scroll bounds."
+		},
+		"ImprovedControls-scale-min": {
+			"type": "float",
+			"default": 0.25,
+			"name": "Scale Minimum",
+			"control": {
+				"arrows": false
+			}
+		},
+		"ImprovedControls-scale-max": {
+			"type": "float",
+			"default": 4,
+			"name": "Scale Maximum",
+			"control": {
+				"arrows": false
+			}
+		},
+		"RotationControl-title": {
+			"type": "title",
+			"name": "Rotation XY Controls"
+		},
+		"RotationControl-description": {
+			"type": "info",
+			"description": "Rotate objects on the X and Y axis independently.",
+			"color": "#000000"
+		},
+		"RotationControl-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enabled"
+		},
+		"RotationControl-use-refresh-button": {
+			"type": "bool",
+			"default": false,
+			"name": "Use refresh button",
+			"description": "Show a refresh button that sets the value rather than the value updating live when typing in an input."
+		},
+		"RotationControl-follow-ui-scale": {
+			"type": "bool",
+			"default": true,
+			"name": "Follow UI Scale"
+		},
+		"RotationControl-control-scale": {
+			"type": "float",
+			"default": 1,
+			"name": "Control Scale",
+			"description": "The UI scale of the and rotation XY controls. If \"Follow UI Scale\" is enabled, it will be relative to that.",
+			"min": 0.1,
+			"max": 2,
+			"control": {
+				"arrows": false
+			}
+		},
+		"ImprovedGroupView-title": {
+			"type": "title",
+			"name": "Improved Group View"
+		},
+		"ImprovedGroupView-description": {
+			"type": "info",
+			"description": "Show more than 20 groups at once in the Group View when selecting multiple objects with a scrollable list of the groups.",
+			"color": "#000000"
+		},
+		"ImprovedGroupView-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enabled"
+		},
+		"ImprovedGroupView-left-align": {
+            "name": "Left Align Groups",
+			"description": "Align groups to the left like vanilla GD.",
+            "type": "bool",
+            "default": false
+        },
+		"ImprovedGroupView-hover-animation": {
+			"name": "Hover Animation",
+			"description": "Hovering over groups will scale the button slightly and darken it.",
+            "type": "bool",
+            "default": true
+		},
+		"JoystickNavigation-title": {
+			"type": "title",
+			"name": "Joystick Navigation"
+		},
+		"JoystickNavigation-description": {
+			"type": "info",
+			"description": "Navigate the editor with a Joystick. Most useful for mobile one handed use.",
+			"color": "#000000"
+		},
+		"JoystickNavigation-enabled": {
+			"type": "bool",
+			"default": false,
+			"name": "Enabled"
+		},
+		"JoystickNavigation-speed": {
+			"type": "float",
+			"min": 0.1,
+			"max": 5,
+			"default": 1,
+			"name": "Joystick Speed Multiplier",
+			"description": "The speed the editor will move at when the joystick is moved."
+		},
+		"JoystickNavigation-opacity": {
+			"type": "float",
+			"control": {
+				"slider": true
+			},
+			"min": 0,
+			"max": 1,
+			"default": 0.6,
+			"name": "Controller Opacity",
+			"description": "Opacity of Joystick Controller."
+		},
+		"JoystickNavigation-scale": {
+			"type": "float",
+			"control": {
+				"slider": true
+			},
+			"min": 0.1,
+			"max": 2,
+			"default": 1,
+			"name": "Controller Scale",
+			"description": "Scale of Joystick Controller."
+		},
+		"JoystickNavigation-lock-position": {
+			"type": "bool",
+			"name": "Lock Position",
+			"description": "Lock the Controller's position where you left it last.",
+			"default": false
+		},
+		"JoystickNavigation-reset-position": {
+			"type": "button",
+			"buttons": {
+				"reset-position": "Reset Position"
+			},
+			"description": "Reset the Controller's position to default."
+		},
+		"NegateInput-title": {
+			"type": "title",
+			"name": "Negate Input"
+		},
+		"NegateInput-description": {
+			"type": "info",
+			"description": "Press N and/or a button to negate any number input when focused.",
+			"color": "#000000"
+		},
+		"NegateInput-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enabled"
+		},
+		"NegateInput-show-negate-button": {
+			"type": "bool",
+			"name": "Show Negate Button",
+			"default": {
+				"win": false,
+				"mac": false,
+				"android": true,
+				"ios": true
+			}
+		},
+		"NegateInput-always-show-negate-button": {
+			"type": "bool",
+			"name": "Always Show Negate Button",
+			"default": false,
+			"description": "Don't hide the negate button when a text input is not focused."
+		},
+		"NegateInput-enable-negate-keybind": {
+			"type": "bool",
+			"name": "Enable Negate Keybind",
+			"default": {
+				"win": true,
+				"mac": true,
+				"android": false,
+				"ios": false
+			}
+		},
+		"ObjectAlignment-title": {
+			"type": "title",
+			"name": "Object Alignment"
+		},
+		"ObjectAlignment-description": {
+			"type": "info",
+			"description": "Align free moved objects to other objects.",
+			"color": "#000000"
+		},
+		"ObjectAlignment-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enabled"
+		},
+		"ObjectAlignment-snap-distance": {
+			"type": "float",
+			"default": 5,
+			"name": "Snap Distance",
+			"description": "How far the object must be from a alignment point to snap to it.",
+			"min": 1,
+			"max": 15
+		},
+		"ObjectAlignment-show-toggle": {
+			"type": "bool",
+			"name": "Show Toggle",
+			"description": "Show Align toggle at bottom right",
+			"default": true
+		},
+		"ObjectAlignment-align-modifier": {
+			"name": "Object Align Modifier",
+			"type": "keybind",
+			"default": ["X", "Ctrl+X"],
+			"category": "editor"
+		},
+		"ObjectSearch-title": {
+			"type": "title",
+			"name": "Object Search"
+		},
+		"ObjectSearch-description": {
+			"type": "info",
+			"description": "Look up objects by name. Adds an all objects tab with search.",
+			"color": "#000000"
+		},
+		"ObjectSearch-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enabled"
+		},
+		"ObjectSearch-keybind": {
+			"name": "Jump to Search Keybind",
+			"description": "Keybind to go to the search tab.",
+			"type": "keybind",
+			"default": ["Ctrl+Space"],
+			"category": "editor"
+		},
+		"ObjectTooltips-title": {
+			"type": "title",
+			"name": "Object Tooltips"
+		},
+		"ObjectTooltips-description": {
+			"type": "info",
+			"description": "Tooltips with object names when hovering over an object in the build tab.",
+			"color": "#000000"
+		},
+		"ObjectTooltips-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enabled"
+		},
+		"ObjectTooltips-scale": {
+			"type": "float",
+			"default": 1,
+			"name": "Tooltip Scale",
+			"description": "How large the tooltip is",
+			"min": 0.5,
+			"max": 2
+		},
+		"ObjectTooltips-hover-scale-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enable Hover Scale",
+			"description": "Scale object buttons while hovering over them."
+		},
+		"ObjectTooltips-show-object-id": {
+			"type": "bool",
+			"default": false,
+			"name": "Show Object IDs",
+			"description": "Show object IDs on the tooltips under the name."
+		},
+		"PlacePreview-title": {
+			"type": "title",
+			"name": "Object Placement Preview",
+			"platforms": ["desktop"]
+		},
+		"PlacePreview-description": {
+			"type": "info",
+			"description": "Hovering on the grid while in the create tab with an object will show a placement preview where the mouse is.",
+			"color": "#000000",
+			"platforms": ["desktop"]
+		},
+		"PlacePreview-enabled": {
+			"type": "bool",
+			"default": false,
+			"name": "Enabled",
+			"platforms": ["desktop"]
+		},
+		"PlacePreview-opacity": {
+			"type": "float",
+			"default": 0.3,
+			"min": 0.05,
+			"max": 1,
+			"name": "Preview Opacity",
+			"platforms": ["desktop"]
+		},
+		"RepeatingEditorButtons-title": {
+			"type": "title",
+			"name": "Repeating Buttons"
+		},
+		"RepeatingEditorButtons-description": {
+			"type": "info",
+			"description": "Hold certain buttons in the editor to repeatedly press them.",
+			"color": "#000000"
+		},
+		"RepeatingEditorButtons-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enabled"
+		},
+		"RepeatingEditorButtons-repeat-delay": {
+			"name": "Repeat Delay (ms)",
+            "description": "Time before repeat starts (ms).",
+            "type": "int",
+            "default": 500,
+			"min": 50,
+            "max": 10000
+		},
+		"RepeatingEditorButtons-repeat-rate": {
+			"name": "Repeat Rate (ms)",
+            "description": "Rate of repetitions (ms).",
+            "type": "int",
+            "default": 100,
+			"min": 5,
+            "max": 2000
+		},
+		"ScrollableObjects-title": {
+			"type": "title",
+			"name": "Scrollable Toolbar"
+		},
+		"ScrollableObjects-description": {
+			"type": "info",
+			"description": "Scroll through editor tabs instead of navigating per page.",
+			"color": "#000000"
+		},
+		"ScrollableObjects-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enabled"
+		},
+		"ScrollableObjects-speed-modifier-key": {
+			"name": "Speed Modifier Key",
+			"description": "Key to hold to speed up scrolling the editor tab.",
+			"type": "keybind",
+			"default": ["Ctrl+LeftControl"],
+			"category": "editor"
+		},
+		"ScrollableObjects-speed-modifier": {
+			"name": "Speed Multiplier",
+			"description": "Scroll speed multiplier when modifier key is held.",
+			"type": "float",
+			"default": 5,
+			"min": 1,
+			"max": 50
+		},
+		"ScrollableObjects-invert-scroll": {
+			"type": "bool",
+			"default": false,
+			"name": "Invert Scroll",
+			"description": "Invert the direction scrolling on the tab goes."
+		},
+		"ScrollableObjects-scrollbar-height": {
+			"type": "float",
+			"default": 10,
+			"name": "Scrollbar Height",
+			"description": "The height the scrollbar at the bottom of the tab is.",
+			"min": 10,
+			"max": 20
+		},
+		"ScrollableObjects-y-offset": {
+			"type": "float",
+			"default": 2,
+			"name": "Tab Y Offset",
+			"description": "The Y offset of the whole tab.",
+			"min": 2,
+			"max": 16
+		},
+		"BetterSelect-title": {
+			"type": "title",
+			"name": "Selection Picker"
+		},
+		"BetterSelect-description": {
+			"type": "info",
+			"description": "Lets you hold a modifier while hovering an object to see all objects at that position, use scroll wheel or left and right arrows to pick which object you want to select.",
+			"color": "#000000"
+		},
+		"BetterSelect-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enabled"
+		},
+		"BetterSelect-modifier": {
+			"type": "keybind",
+			"name": "Select Picker Modifier",
+			"default": ["Alt+LeftMenu"],
+			"category": "editor"
+		},
+		"BetterSelect-release-modifier-to-select": {
+			"type": "bool",
+			"default": false,
+			"name": "Release Modifier To Select",
+			"description": "Releasing the modifier key will select the object you are current't at in the picker."
+		},
+		"BetterSelect-show-object-info": {
+			"type": "bool",
+			"default": true,
+			"name": "Show Object Info",
+			"description": "Show object info above the select picker."
+		},
+		"SingleDeselect-title": {
+			"type": "title",
+			"name": "Single Deselect"
+		},
+		"SingleDeselect-description": {
+			"type": "info",
+			"description": "Hold a modifier to deselect objects within an existing selection.",
+			"color": "#000000"
+		},
+		"SingleDeselect-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enabled"
+		},
+		"SingleDeselect-key": {
+			"name": "Deselect Modifier Key",
+			"description": "Key to hold click to deselect.",
+			"type": "keybind",
+			"default": ["P"],
+			"category": "editor"
+		},
+		"StartPosSwitcher-title": {
+			"type": "title",
+			"name": "Start Position Switcher"
+		},
+		"StartPosSwitcher-description": {
+			"type": "info",
+			"description": "An editor start position switcher in the view mode.",
+			"color": "#000000"
+		},
+		"StartPosSwitcher-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enabled",
+			"enable-if": "saved:wip-features",
+			"enable-if-description": "This feature is not complete yet and is coming in a future update."
+		},
+		"StartPosSwitcher-auto-hide-switcher": {
+			"type": "bool",
+			"default": {
+				"win": true,
+				"mac": true,
+				"android": false,
+				"ios": false
+			},
+			"name": "Auto Hide Switcher",
+			"description": "Hide the switcher when not being used."
+		},
+		"ThatPasteButton-title": {
+			"type": "title",
+			"name": "Paste Warnings"
+		},
+		"ThatPasteButton-description": {
+			"type": "info",
+			"description": "Show warnings for paste state and paste color.",
+			"color": "#000000"
+		},
+		"ThatPasteButton-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enabled"
+		},
+		"ThatPasteButton-toggle-paste-state": {
+			"name": "Show Paste State Warning",
+			"default": true,
+			"type": "bool"
+		},
+		"ThatPasteButton-toggle-paste-state-group": {
+			"name": "Show Paste State Warning on Edit Group popup",
+			"default": true,
+			"type": "bool"
+		},
+		"ThatPasteButton-toggle-paste-color": {
+			"name": "Show Paste Color Warning",
+			"default": true,
+			"type": "bool"
+		},
+		"ThatPasteButton-dont-show-if-default": {
+			"name": "Don't show warning if objects are default",
+			"description": "Don't show the warning when selected objects have no groups and use default colors.",
+			"default": false,
+			"type": "bool"
+		},
+		"ThatPasteButton-object-requirement": {
+			"name": "Number of Objects to Show Warning",
+			"description": "The amount of selected objects needed for the warning to pop up.",
+			"type": "int",
+			"default": 2,
+			"min": 1
+		},
+		"UIScaling-title": {
+			"type": "title",
+			"name": "UI Scale"
+		},
+		"UIScaling-description": {
+			"type": "info",
+			"description": "How large elements in the UI are.",
+			"color": "#000000"
+		},
+		"UIScaling-scale": {
+			"type": "float",
+			"default": 0.9,
+			"name": "Scale Factor",
+			"min": 0.1,
+			"max": 1,
+			"control": {
+                "slider": true,
+				"slider-step": 0.025
+            }
+		},
+		"UIScaling-scale-pause": {
+			"type": "bool",
+			"default": true,
+			"name": "Scale Pause Menu"
+		},
+		"UIScaling-scale-toolbar": {
+			"type": "bool",
+			"default": true,
+			"name": "Scale Toolbar",
+			"description": "Scale the toolbar (create, edit, and delete tabs) with the rest of the UI."
+		},
+		"UIScaling-use-safe-area": {
+			"type": "bool",
+			"default": true,
+			"name": "Use Safe Area",
+			"description": "Use the devices safe area when positioning to prevent camera cutouts and notches from overlapping UI elements."
+		},
+		"UIScaling-safe-area-in-pause": {
+			"type": "bool",
+			"default": true,
+			"name": "Safe Area in Pause Menu"
+		},
+		"UIScaling-use-custom-safe-area": {
+			"type": "bool",
+			"default": false,
+			"name": "Enable Custom Safe Area",
+			"description": "Enable a custom safe area, aka the distance that is padded on the left and right."
+		},
+		"UIScaling-custom-safe-area": {
+			"type": "float",
+			"default": 24,
+			"min": 0,
+			"max": 50,
+			"name": "Custom Safe Area",
+			"description": "Set a custom safe area, aka the distance that is padded on the left and right."
+		},
+		"QuickExtras-title": {
+			"type": "title",
+			"name": "Quick Edit Extras"
+		},
+		"QuickExtras-description": {
+			"type": "info",
+			"description": "A shortcut button to edit extra properties of objects, replaces Edit Special when it isn't needed.",
+			"color": "#000000"
+		},
+		"QuickExtras-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enabled"
+		},
+		"QuickExtras-always-show": {
+			"type": "bool",
+			"default": false,
+			"name": "Always show Edit Extras button",
+			"description": "Make the Edit Extras button always visible instead of replacing Edit Special."
+		},
+		"EditorGridCustomization-title": {
+			"type": "title",
+			"name": "Editor Grid"
+		},
+		"EditorGridCustomization-description": {
+			"type": "info",
+			"description": "Customize the colors of the editor grid",
+			"color": "#000000"
+		},
+		"EditorGridCustomization-enabled": {
+			"type": "bool",
+			"default": true,
+			"name": "Enabled"
+		},
+		"EditorGridCustomization-grid-color": {
+			"type": "rgba",
+			"default": [0, 0, 0, 150],
+			"name": "Grid Color"
+		},
+		"EditorGridCustomization-grid-invert": {
+			"type": "bool",
+			"name": "Grid Inverts Behind",
+			"description": "Make the grid invert the color behind it rather than a static color. (Overrides Grid Color setting)",
+			"default": false
+		},
+		"EditorGridCustomization-grid-invert-opacity": {
+			"type": "float",
+			"name": "Grid Invert Opacity",
+			"description": "The opacity of the grid when using invert",
+			"default": 0.5,
+			"min": 0,
+			"max": 1,
+			"enable-if": "EditorGridCustomization-grid-invert"
+		},
+		"EditorGridCustomization-effect-line-color": {
+			"type": "rgba",
+			"default": [0, 255, 255, 255],
+			"name": "Effect Line Color"
+		},
+		"EditorGridCustomization-color-effect-lines-by-trigger": {
+			"type": "bool",
+			"name": "Color Effect Lines by Trigger Color",
+			"default": false
+		},
+		"EditorGridCustomization-music-line-active-color": {
+			"type": "rgba",
+			"default": [50, 255, 50, 255],
+			"name": "Music Line Active Color"
+		},
+		"EditorGridCustomization-music-line-inactive-color": {
+			"type": "rgba",
+			"default": [2, 255, 2, 100],
+			"name": "Music Line Inactive Color"
+		},
+		"EditorGridCustomization-rainbow-music-line": {
+			"type": "bool",
+			"name": "Rainbow Music Line",
+			"description": "Just for fun :3",
+			"default": false
+		},
+		"EditorGridCustomization-center-line-color": {
+			"type": "rgba",
+			"default": [0, 0, 0, 50],
+			"name": "Center Line Color"
+		},
+		"EditorGridCustomization-preview-lock-line-color": {
+			"type": "rgba",
+			"default": [255, 150, 0, 255 ],
+			"name": "Preview Lock Line Color"
+		},
+		"Keybinds-title": {
+			"type": "title",
+			"name": "Keybinds"
+		},
+		"Keybinds-description": {
+			"type": "info",
+			"description": "Extra keybinds for navigating the editor.",
+			"color": "#000000"
+		},
+		"Keybinds-exit-pause-menu": {
+			"name": "Exit Pause Menu",
+			"type": "keybind",
+			"default": ["Escape"],
+			"category": "editor"
+		},
+		"Debug-title": {
+			"type": "title",
+			"name": "Debug"
+		},
+		"Debug-description": {
+			"type": "info",
+			"description": "Debug settings for developers.",
+			"color": "#000000"
+		},
+		"Debug-module-logs": {
+			"type": "bool",
+			"name": "Module Logs",
+			"default": false,
+			"description": "Show Module Created, Destroyed, and Toggled logs"
+		},
+		"Debug-redownload-object-names": {
+			"type": "button",
+			"buttons": {
+				"redownload": "Redownload Object Names"
+			},
+			"description": "Redownload Object Names if they are showing up as \"Unnamed\" (Requires Internet)"
+		}
+	},
+	"api": {
+		"include": [
+			"include/API.hpp",
+			"include/UIScaling.hpp"
+		]
+	}
+}

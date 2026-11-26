@@ -1,0 +1,999 @@
+# 1.2.0-beta.9
+- <c-dddddd>Disable Advanced Grid Controls until I can make them stable</c>
+- <c-dddddd>Disable Start Pos Switcher until I can make them stable</c>
+- <c-dddddd>Disable Lazy Loaded Object Buttons until I can make them stable</c>
+
+# 1.2.0-beta.8
+- <c-dddddd>Fix a crash when selecting objects</c>
+
+# 1.2.0-beta.7
+- <c-dddddd>Fix tooltip hover when an Editor Window is open</c>
+- <c-dddddd>Only make CreateMenuItems lazy during EditorUI::setupCreateMenu</c>
+- <c-dddddd>Fix camera to object button not working</c>
+- <c-dddddd>Add Advanced Grid Controls</c>
+
+# 1.2.0-beta.6
+- <c-dddddd>Fix modules leaking when exiting the editor, and thus fixing crashes to to leaked modules</c>
+- <c-dddddd>Fix clicking an object in the editor not scrolling to it in the build tabs when scrollable objects is enabled</c>
+- <c-dddddd>Fix clicking an object that hasn't been loaded not highlighting it when Lazy Loaded Object Buttons is enabled</c>
+- <c-dddddd>Fix scrolling while the mouse isn't on top of a scrollable toolbar not scrolling the editor</c>
+
+# 1.2.0-beta.5
+- <c-dddddd>Fix some crashes</c>
+
+# 1.2.0-beta.4
+- <c-dddddd>Rebuild against updated bindings to resolve some goofy behavior</c>
+
+# 1.2.0-beta.3
+- <c-dddddd>Rerelease with geode Beta 3</c>
+- <c-dddddd>Bring back Android support just to test</c>
+
+# 1.2.0-beta.2
+- <c-dddddd>Remove Android support due to broken class members</c>
+
+# 1.2.0-beta.1
+- <c-dddddd>CURRENTLY DOES NOT SUPPORT MACOS AND IOS</c>
+
+## Known Issues
+- <c-dddddd>Pinch to rotate option does not work</c>
+- <c-dddddd>Advanced Grid Controls does not work</c>
+- <c-dddddd>Behavior when DevTools is open may be strange</c>
+- <c-dddddd>Camera centering does not work with editor rotation</c>
+
+## Changes
+
+- <c-dddddd>Update to 2.209</c>
+- <c-dddddd>Too many bug fixes to count, I can't even remember</c>
+- <c-dddddd>Fix a vanilla crash that could happen when a text area lasts longer than the delegate</c>
+- <c-dddddd>Improve Scrollable Toolbars</c>
+  - <c-dddddd>Better Performance</c>
+  - <c-dddddd>Culling is immediate now</c>
+  - <c-dddddd>Fixed scrollbars showing when they shouldn't</c>
+  - <c-dddddd>Horizontal defaults work properly when a tab has less than row * columns items</c>
+  - <c-dddddd>Culling now removes buttons when off view rather than simply hiding them, improving performance</c>
+- <c-dddddd>Scrolling while hovered over a text input no longer scrolls the editor</c>
+- <c-dddddd>Improved editor load times by making object search index after load</c>
+- <c-dddddd>Improve performance of UI scaling</c>
+- <c-dddddd>Make UI Scaling and UI Safe Area sliders affect the UI live</c>
+- <c-dddddd>Remove BetterEdit compatibility changes and mark incompatible</c>
+- <c-dddddd>Pixel objects are now scaled properly in the Search tab</c>
+- <c-dddddd>Rework a ton of code</c>
+- <c-dddddd>Add a Selection Bounds after playtesting fix to Selection Fix</c>
+- <c-dddddd>Remove some redundant isColorable checks</c>
+- <c-dddddd>Add Rotation XY Controls</c>
+- <c-dddddd>Redesign Editor StartPos Switcher</c>
+- <c-dddddd>Add names to Improved Group View</c>
+
+# 1.1.8
+- <c-dddddd>Fix delete tab being unresponsive</c>
+- <c-dddddd>Fix Allium Polygon tool breaking</c>
+
+# 1.1.7
+- <c-dddddd>Add flip position lock to Edit Tools</c>
+- <c-dddddd>Fix toolbar clicks being registered behind it</c>
+- <c-dddddd>Fix editor rotation reset keybind not resetting rotation of scale and rotate controls</c>
+- <c-dddddd>Fix being able to click buttons on the main UI as if they were rotated</c>
+- <c-dddddd>Fix selection picker UI not rotating with the camera</c>
+- <c-dddddd>Fix selection picker objects being invisible if camera was rotated between 45-315 degrees</c>
+- <c-dddddd>Remove clean start pos integration due to many complaints</c>
+
+# 1.1.6
+- <c-dddddd>Add some safety checks to prevent potential crashes if settings are somehow disabled twice without being enabled in between</c>
+- <c-dddddd>Add Clean StartPos integration</c>
+- <c-dddddd>Change corner radius and opacity of start pos switcher background</c>
+- <c-dddddd>Fix BetterEdit hooks not restoring when toggling off Tinker's Auto Save</c>
+- <c-dddddd>Fix Edit Tab culling</c>
+- <c-dddddd>Fix hovered object buttons not scaling down properly when pausing</c>
+- <c-dddddd>Maybe fix rare crash with object tooltips enabled</c>
+- <c-dddddd>Fix auto save crash on Android32
+- <c-dddddd>Maybe fix a potential crash with the select preview</c>
+- <c-dddddd>Fix a crash if EditorUI::createObject returns nullptr</c>
+
+# 1.1.5
+- <c-dddddd>Re-add text input touch rotation fix on iOS and fix the crash</c>
+- <c-dddddd>Automatically set nwo5's UI Scaling mod to prefer tinker scaling when you change scaling via Tinker settings</c>
+
+# 1.1.4
+- <c-dddddd>Remove text input touch rotation fix on iOS</c>
+
+# 1.1.3
+- <c-dddddd>Change Touch Forward Z Order to 50</c>
+- <c-dddddd>Force Position Slider position and size in an update method</c>
+- <c-dddddd>Force Link Controls position and size in an update method</c>
+- <c-dddddd>Force BetterEdit Grid Controls position and visibility in an update method</c>
+- <c-dddddd>Fix Object Placement Preview being hidden if the position was below the toolbar height in node space instead of world space</c>
+- <c-dddddd>Fix Object Placement Preview not properly toggling on until you open another popup</c>
+- <c-dddddd>Fix Object Placement Preview not updating when clicking an object in the editor to jump to it in the create tab</c>
+- <c-dddddd>Change default Object Placement Preview opacity to 0.3</c>
+- <c-dddddd>Fix a typo in the "Head hitting (breakable blocks) fix" setting description</c>
+- <c-dddddd>Fix number inputs for scale and rotate controls not working</c>
+- <c-dddddd>Adjust corner radii of number inputs for scale and rotate controls</c>
+- <c-dddddd>Fix rotated text inputs not properly rotating touch for updating cursor position when the editor is rotated</c>
+- <c-dddddd>Adjust size of layer input if layer locking is disabled</c>
+- <c-dddddd>Clean Pause volume sliders now don't reset if the volume is > 100% and slider bypass is disabled</c>
+
+# 1.1.2
+- <c-dddddd>Fix a crash when editing a start pos</c>
+
+# 1.1.1
+- <c-dddddd>Fix UI Scaling not being disabled for pause when scale pause menu is disabled</c>
+- <c-dddddd>Fix position of settings menu when adjusting UI scale with clean pause enabled</c>
+- <c-dddddd>Add option to not use safe areas in pause menu</c>
+
+# 1.1.0
+- <c-dddddd>Fix status bar not respecting safe areas</c>
+- <c-dddddd>Status bar will now blur alongside toolbar if toolbar blur is enabled</c>
+- <c-dddddd>Fix object info label being offset when it doesn't need to be</c>
+- <c-dddddd>Fix free moving an object while swipe is enabled visually showing the selection box</c>
+- <c-dddddd>Fix Prevter's Smooth Scroll mod not working with Scrollable Toolbars</c>
+- <c-dddddd>Tooltips should no longer show while in DevTools</c>
+- <c-dddddd>Fix button offsets being wrong with More Attributes enabled and NinKaz's Editor Utils installed and you weren't using a wide aspect ratio</c>
+- <c-dddddd>Repeating Editor Buttons now properly toggles on for all buttons it allows if it was off when opening the editor</c>
+- <c-dddddd>Repeating Editor Buttons now works for the following:</c>
+  - <c-dddddd>Tinker's Grid Controls</c>
+  - <c-dddddd>Editor tab navigation buttons</c>
+  - <c-dddddd>BetterEdit custom move menu navigation buttons</c>
+  - <c-dddddd>Main Select Song Arrows</c>
+  - <c-dddddd>All arrow buttons in triggers</c>
+  - <c-dddddd>Extra2 Menu</c>
+  - <c-dddddd>Group ID Offset Popup</c>
+- <c-dddddd>Make Negate Input button look nicer</c>
+- <c-dddddd>Negate Input button no longer shows for Editor Layer 1 and 2, Order, and Channel inputs in the Edit Group popup</c>
+- <c-dddddd>Fix Negate Input showing on volume inputs in pause</c>
+- <c-dddddd>Add Selection Fix, allowing very large objects to be selected outside their normal range</c>
+- <c-dddddd>Fix selecting objects with the selection picker not updating object info</c>
+- <c-dddddd>Add object info above selection picker</c>
+- <c-dddddd>Fix selection picker showing behind objects when shaders are active</c>
+- <c-dddddd>Tweak selection picker functionality</c>
+  - <c-dddddd>By default, releasing the modifier no longer selects the object, this can be changed in settings</c>
+  - <c-dddddd>Now to select an object, you can middle mouse click or use the up arrow. This will toggle the selection</c>
+- <c-dddddd>Added Object Placement Preview option, shows the object where it will be placed at the mouse position</c>
+- <c-dddddd>Added subtle scale to object buttons in object tooltips</c>
+- <c-dddddd>Adjust size of Scroll Layer in scrollable toolbar so buttons do not get cut off when held</c>
+- <c-dddddd>Fix jumpy scrolling and zooming</c>
+- <c-dddddd>Tweak link controls size to not overlap with tabs slightly at 1.0x UI Scale</c>
+- <c-dddddd>Fix link controls position not respecting different aspect ratios</c>
+- <c-dddddd>Fix some UI Scaling bugs</c>
+- <c-dddddd>You can no longer disable the UI scaling module, as it is core to certain functionality of the mod</c>
+  - <c-dddddd>The module is core for handling positioning of other nodes in other modules and handling their scale, as well as compatibility fixes for positioning with other mods, so this decision had to be made. It is mostly accurate to vanilla at 1.0x scale, so set it to that if you wish to "disable" it.</c>
+- <c-dddddd>Switching tabs in Tinker settings now resets the search bar</c>
+- <c-dddddd>Fixed a bug where typing multiple characters in search on the same frame would duplicate settings</c>
+- <c-dddddd>Tweaked editor position slider position to be closer to the center</c>
+- <c-dddddd>Fix length in editor positioning at 1.0x UI Scale</c>
+- <c-dddddd>Increase Slider fix distance from 300 to 800 units to the right</c>
+- <c-dddddd>Slider fix will no longer reset your position if the value doesn't change when dragging</c>
+- <c-dddddd>Clean up redundant active objects check for Status Bar</c>
+- <c-dddddd>Tooltips now follow the rest of the mod's design language</c>
+- <c-dddddd>Add Improved Editor Layer Controls</c>
+- <c-dddddd>Lower Preview Object Color button container Z Order to prevent conflict with Object Groups when Scrollable Toolbar is disabled</c>
+- <c-dddddd>Fix a crash when disabling object alignment toggler while object alignment is already off</c>
+- <c-dddddd>Fix object search being openable via keybind while in playtest</c>
+- <c-dddddd>Volume sliders in editor pause now respect slider bypass hacks</c>
+- <c-dddddd>Properly center the sprite on any toggles added by Tinker</c>
+- <c-dddddd>Add Centered Toggles option to center the sprites on vanilla toggles</c>
+- <c-dddddd>Fix scale and rotate control rotations not being reset when disabling Editor Rotation while the editor is rotated</c>
+- <c-dddddd>Fix Tinker version label in pause not accounting for safe areas</c>
+- <c-dddddd>Fix playtest and playback menus shrinking when there is available space at smaller UI scales</c>
+- <c-dddddd>Auto hide layout generator mod buttons when music playback is active and music camera lock is enabled</c>
+- <c-dddddd>Add Quick Save</c>
+- <c-dddddd>Add Auto Save</c>
+
+# 1.0.77
+- <c-dddddd>Crash hotfix</c>
+
+# 1.0.76
+- <c-dddddd>Fix a bug where settings that are visible in the scroll area wouldn't get reset if you pressed reset all</c>
+- <c-dddddd>Fix a memory leak where specifically the F modifier block would leak</c>
+- <c-dddddd>Fix a crash when pressing escape while editing multiple text objects on macOS</c>
+- <c-dddddd>Add back keybind to exit editor pause and fix a crash related to it (thanks robtop for the use after free :3)</c>
+- <c-dddddd>Add Go to Layer keybind option</c>
+- <c-dddddd>Add Cycle Color Overlay keybind option</c>
+- <c-dddddd>Custom grid sizes are now relative to the selected object and don't get overriden</c>
+- <c-dddddd>Add grid scaling toggle to scale placed objects relative to the grid size</c>
+
+# 1.0.75
+- <c-dddddd>Fix repeated status bar labels</c>
+- <c-dddddd>Fix move event being called thousands of times per frame causing the game to lag when doing anything that moves an object</c>
+- <c-dddddd>Fix length in editor position being goofy when status bar is enabled</c>
+
+# 1.0.74
+- <c-dddddd>Object Names are now also stored in resources as a fallback</c>
+- <c-dddddd>Use geode::Label whenever possible, improving performance especially when opening the font picker</c>
+- <c-dddddd>Fix Length in Editor label not respecting safe area</c>
+- <c-dddddd>Fix the toggle overflow menu overlapping the toolbar too much when it is scrollable and preview object colors is off</c>
+- <c-dddddd>Fix Length in Editor not updating when an object is moved</c>
+- <c-dddddd>Fix toggling Length in Editor not updating the object info label position</c>
+- <c-dddddd>Add Status Bar option to show various information such as editor zoom, rotation, position, length, object count, etc.</c>
+
+# 1.0.73
+- <c-dddddd>Fix non-alt keys not working properly with the Selection Picker</c>
+- <c-dddddd>Show Tinker version on top right of editor pause for easier debugging from screenshots and video</c>
+- <c-dddddd>Fix default color button showing in recent colors</c>
+- <c-dddddd>Add button to redownload object names in Debug settings</c>
+
+# 1.0.72
+- <c-dddddd>Fix touch not working in bottom right of editor during playtest</c>
+
+# 1.0.71
+- <c-dddddd>Fix camera rotation not properly restoring when stopping playtest on Mac</c>
+- <c-dddddd>Fix deleting objects not properly updating duration dragging on Mac</c>
+- <c-dddddd>You can now change all Selection Picker settings without restarting the editor</c>
+- <c-dddddd>You can now change all Scrollable Toolbar settings without restarting the editor</c>
+- <c-dddddd>You can now change all Preview Object Color settings without restarting the editor</c>
+- <c-dddddd>You can now change all Hide UI settings without restarting the editor</c>
+- <c-dddddd>You can now change all Custom Toolbar Background settings without restarting the editor except Blur Behind</c>
+- <c-dddddd>You can now toggle Grid Controls without restarting the editor</c>
+- <c-dddddd>You can now toggle More Attributes without restarting the editor</c>
+- <c-dddddd>Bring back Copy Object String to iOS</c>
+- <c-dddddd>Fix new level camera starting position being under the ground</c>
+- <c-dddddd>Make Toggle Overflow menu expand button hitbox larger</c>
+- <c-dddddd>Fix Toggle Overflow scaling when scale toolbars is disabled</c>
+- <c-dddddd>Fix object groups button scale when scale toolbars is disabled</c>
+
+# 1.0.70
+- <c-dddddd>Enable Selection Picker for mobile (for keyboard users)</c>
+- <c-dddddd>Auto disable Tinker if Multiplayer Edit is enabled.</c>
+- <c-dddddd>Attempt to fix Toggle Overflow Menu with Editor Collab</c>
+
+# 1.0.69
+- <c-dddddd>Fix a crash</c>
+- <c-dddddd>Fix link controls position on mobile</c>
+
+# 1.0.68
+- <c-dddddd>Mark Auto Build Helper as incompatible with Editor Collab</c>
+- <c-dddddd>Fix Preview Object Colors no longer working</c>
+- <c-dddddd>Fix Global Hooks toggling off when leaving the editor</c>
+- <c-dddddd>Fix Reference Image showing base64 path in level instead of warning text</c>
+- <c-dddddd>Toggle Overflow Menu sort should now stay consistent</c>
+- <c-dddddd>Fix negate input allowing you to negate inputs that don't support negative numbers</c>
+- <c-dddddd>Fix grid size controls accepting negative numbers (even though it did nothing anyways)</c>
+- <c-dddddd>You can now change all Start Position Tools settings without restarting the editor</c>
+- <c-dddddd>You can now change all Object Tooltips settings without restarting the editor</c>
+- <c-dddddd>You can now change all Negate Input settings without restarting the editor</c>
+- <c-dddddd>You can now toggle Object Summary without restarting the editor</c>
+- <c-dddddd>You can now toggle Object Alignment without restarting the editor</c>
+- <c-dddddd>You can now toggle Duration Drag without restarting the editor</c>
+- <c-dddddd>You can now toggle Live Colors without restarting the editor</c>
+- <c-dddddd>Fixed toggling Length In Editor not updating the position properly</c>
+- <c-dddddd>Improved Length In Editor positioning with UI Scaling</c>
+- <c-dddddd>Move Improved Link Controls into Fixes category. Allow toggling without editor restart</c>
+- <c-dddddd>Fix BetterEdit hooks not being re-enabled if Improved Font Picker was disabled</c>
+- <c-dddddd>Fix text inputs not unfocusing when pausing the editor, breaking the ability to use escape to unpause</c>
+
+# 1.0.67
+- <c-dddddd>SIX SEVEN</c>
+- <c-dddddd>Improve Toggle Overflow Menu look when safe areas are used</c>
+- <c-dddddd>Fixed Toggle Overflow Menu closing when you are clicking inside it</c>
+- <c-dddddd>Add animations to Toggle Overflow Menu</c>
+- <c-dddddd>Fix separator line scale in Toggle Overflow Menu</c>
+- <c-dddddd>Add missing node IDs to Toggle Overflow Menu</c>
+- <c-dddddd>Add missing node IDs to Grid Controls</c>
+- <c-dddddd>Add shadows to Style Picker UI</c>
+- <c-dddddd>Add shadows to Font Picker UI</c>
+- <c-dddddd>Fix missing shadow in custom settings UI</c>
+- <c-dddddd>Fix Selection Picker alt conflicts with other keybinds</c>
+
+# 1.0.66
+- <c-dddddd>Make toolbar UI scaling safer</c>
+- <c-dddddd>UI Scaling's Safe Area setting now properly affects tab menu pages</c>
+- <c-dddddd>Fix objects being offset when both snap and align are enabled</c>
+- <c-dddddd>Fix Reset All not resetting all in the custom settings menu</c>
+- <c-dddddd>Fix color of selected CreateMenuItems</c>
+- <c-dddddd>Fix linked orange teleport portals being able to be jumped to in the create tab, and placing phantom objects</c>
+- <c-dddddd>Fix Object Alignment being stuck active if you hid the toggle while it was toggled on</c>
+- <c-dddddd>Enabling/Disabling the Object Alignment toggle no longer requires reopening the editor</c>
+- <c-dddddd>Enabling/Disabling the Lasso Select toggle no longer requires reopening the editor</c>
+- <c-dddddd>Add Toggler Overflow Menu</c>
+
+# 1.0.65
+- <c-dddddd>Remove Alpha Smile gif on Android32 because of an ImagePlus crash</c>
+
+# 1.0.64
+- <c-dddddd>Fix a crash when closing the settings popup on iOS</c>
+- <c-dddddd>Trim settings search queries</c>
+- <c-dddddd>Fix link menu scaling and positioning</c>
+- <c-dddddd>Fix UI positioning with Editor Collab</c>
+- <c-dddddd>Fix settings button in pause menu overlapping with Object Collab "Copy C-Data" button</c>
+
+# 1.0.63
+- <c-dddddd>Add Object Alignment, hold X or use the toggle to enable</c>
+- <c-dddddd>Fix some unscheduling issues when a level saves</c>
+
+# 1.0.62
+- <c-dddddd>Fix a crash on iOS when closing the style picker specifically after switching from one tab to another</c>
+- <c-dddddd>Fix "MIddleground" typo</c>
+
+# 1.0.61
+- <c-dddddd>Fix selection picker not highlighting objects green</c>
+- <c-dddddd>Always show selection picker above mouse instead of group center (as it can position off screen with group parents)</c>
+- <c-dddddd>Make ICGJScaleControl::loadValues safer</c>
+- <c-dddddd>Fix instant collision trigger "Remap Fix" checkbox overlapping multi trigger checkbox</c>
+- <c-dddddd>Stop selection picker hover on GD being backgrounded to prevent issues with Alt Tabbing</c>
+- <c-dddddd>Make settings UI match geode's when opened from the Geode menu</c>
+- <c-dddddd>Add shameless self promotion</c>
+
+# 1.0.60
+- <c-dddddd>Fix arrow buttons doing both selection picking and switching editor layers at once if Custom Keybinds isn't installed</c>
+- <c-dddddd>Fix ground not being visibly selected when a ground hasn't been selected yet in the new style picker</c>
+- <c-dddddd>Fix settings hooks not being properly toggled when changed</c>
+- <c-dddddd>Fix inputting numbers in a text object not working properly</c>
+- <c-dddddd>Fix color channel input, browse button, and preview color checkbox showing in text input tab</c>
+- <c-dddddd>Redesign the settings menu (first iteration before reorganizing and such)</c>
+
+# 1.0.59
+- <c-dddddd>Improve live color previewing</c>
+- <c-dddddd>Fix HSV preview button showing for preview object colors popup when the default color is selected (and thus doing nothing when pressed)</c>
+- <c-dddddd>Fix recent colors being duplicated if you pick the same color for base and detail</c>
+- <c-dddddd>Fix line not being visibly selected when a line hasn't been selected yet in the new style picker</c>
+- <c-dddddd>Fix a crash that can happen with QOLMod and the new style picker</c>
+
+# 1.0.58
+- <c-dddddd>Who knew there were so many crashes, fixed another, apologies for so many updates, I just don't want the editor crashing for anyone</c>
+
+# 1.0.57
+- <c-dddddd>Fix a crash when alt tabbing while hovering an object</c>
+
+# 1.0.56
+- <c-dddddd>Fix another crash with Editor Collab</c>
+- <c-dddddd>Fix a crash when opening the editor</c>
+- <c-dddddd>Fix a bug where the select picker wouldn't open after hovering certain objects</c>
+
+# 1.0.55
+- <c-dddddd>Fix crash with linked teleport portals and the selection picker</c>
+- <c-dddddd>Fix crash when using selection picker with Editor Collab enabled</c>
+- <c-dddddd>Selection picker now works with swipe</c>
+- <c-dddddd>Selection picker now has a modifier keybind option</c>
+- <c-dddddd>Clean up selection picker design</c>
+
+# 1.0.54
+- <c-dddddd>Improved font picker now auto scrolls to the selected font when opened</c>
+- <c-dddddd>Adjust font picker positions and scrollbar width</c>
+- <c-dddddd>Added an improved style picker</c>
+- <c-dddddd>Rename "G1" (for ground color 1) to "G" for consistency with "MG"</c>
+- <c-dddddd>Live Colors now uses a consistent Color Channel Sprite as everywhere else</c>
+- <c-dddddd>Increase Live Colors scale slightly</c>
+- <c-dddddd>Live Colors now respects pulse HSV properly</c>
+- <c-dddddd>Change copy color label to be more visible</c>
+- <c-dddddd>Decrease scale of color ID label slightly</c>
+- <c-dddddd>Add live color preview checkbox to color select popup</c>
+- <c-dddddd>(Desktop only) Add better selection tools, hold alt while hovering an object to see all objects at that position, use scroll wheel or left and right arrows to pick which object you want to select</c>
+- <c-dddddd>Restructure entire mod</c>
+
+# 1.0.53
+- <c-dddddd>Fix a crash with recursive copy color</c>
+- <c-dddddd>Fix spawn remap buttons persisting on other pages</c>
+- <c-dddddd>Add head hitting/breakable blocks physics bug fix</c>
+- <c-dddddd>Added an improved font picker</c>
+
+# 1.0.52
+- <c-dddddd>Add some sanity checks to tooltips</c>
+- <c-dddddd>Add some sanity checks to smooth zooming</c>
+- <c-dddddd>Fix color preview opacity</c>
+- <c-dddddd>Fix overlapping buttons in Advanced Follow</c>
+- <c-dddddd>Add show copy color option</c>
+- <c-dddddd>Decrease minimum zoom option to 0.005</c>
+- <c-dddddd>Decrease maximum zoom option to 10000</c>
+- <c-dddddd>Change default maximum zoom to 1000</c>
+
+# 1.0.51
+- <c-dddddd>Fix a crash</c>
+
+# 1.0.50
+After some extended thought after recent events, I am not gonna let some of you bring me down anymore. I am human after all, please respect that. Keeping this alive as my main sole project, as I have a passion for it and don't want to abandon it.
+- <c-dddddd>Fix Allium compatibility issues</c>
+- <c-dddddd>Fix editor pause audio sliders compatibility with the Logarithmic Volume mod and the Exponential Volume mod</c>
+- <c-dddddd>Remove dead discord link</c>
+- <c-dddddd>Purely for the sake of consistency, even if a little weird, make the corner radii of the clean pause menu match the main pause menu</c>
+- <c-dddddd>Fix copy color text overlap</c>
+- <c-dddddd>Copy color now shows the color it is copying instead of grey</c>
+- <c-dddddd>Object Collab support</c>
+- <c-dddddd>Clean up ugly recent color saving code (what was I on?)</c>
+- <c-dddddd>Clean up Improved Group View spawn remap work arounds for Named Editor Groups</c>
+- <c-dddddd>Add Extra Attributes for Advanced Follow, Instant Collision, and Keyframes. Also add ability to manually set Link IDs</c>
+
+# 1.0.49
+- <c-dddddd>Improve compatibility with Quick Move Buttons mod</c>
+- <c-dddddd>Add "Level Saved!" Notification when no save confirmation is enabled</c>
+- <c-dddddd>Fix orange teleport portals not becoming visible when selected while hidden</c>
+- <c-dddddd>Slightly increase the size of the background in the editor pause menu</c>
+- <c-dddddd>Fix a crash with Improved Scale Controls</c>
+- <c-dddddd>Tweaked pause menu button width</c>
+- <c-dddddd>Tweaked pause audio slider positions</c>
+- <c-dddddd>Add custom scale minimum and maximum settings for Improved Controls</c>
+
+# 1.0.48
+- <c-dddddd>Fix BetterEdit hooks getting disabled when a feature that disables them isn't enabled</c>
+- <c-dddddd>Fixed toggling features not properly re-enabling BetterEdit versions of said feature</c>
+- <c-dddddd>Fix rotate text input not being centered under the buttons when one object is selected</c>
+- <c-dddddd>Add cleaner pause menu, with included volume sliders</c>
+- <c-dddddd>Fix Link Controls scale with BetterEdit when UI Scale in Tinker is disabled</c>
+- <c-dddddd>Improve UI scale compatibility with Start Pos Switcher, Better Editor Positions, and EditorMusic</c>
+- <c-dddddd>Add disable save confirmation option</c>
+
+# 1.0.47
+- <c-dddddd>Color selection performance improvements</c>
+
+# 1.0.46
+- <c-dddddd>Fix slope orientations for Smart Templates</c>
+- <c-dddddd>Fix NA color being able to be set</c>
+- <c-dddddd>Fix out of bounds color ID inputs</c>
+- <c-dddddd>Add setting to re-enable out of bounds color ID inputs, also allowing setting NA color</c>
+- <c-dddddd>Fix a potential crash when opening the color picker with a selection</c>
+
+# 1.0.45
+- <c-dddddd>Add absolute scaling and rotation toggles</c>
+- <c-dddddd>Fix some rotated camera touch issues</c>
+- <c-dddddd>Fix Duration Drag touch issues</c>
+- <c-dddddd>Change some Duration Drag sprites</c>
+- <c-dddddd>Improve Duration Drag sliders by making them no longer jump to the center of where you tapped</c>
+- <c-dddddd>Add my own Improved Color Picker (based on BetterEdit)</c>
+  - <c-dddddd>Scrollable</c>
+  - <c-dddddd>Shows more colors</c>
+  - <c-dddddd>Persistent recent colors per level</c>
+  - <c-dddddd>Auto scrolling when typing color IDs or using arrow buttons</c>
+  - <c-dddddd>Next Free respects color channels that are set but not used by objects</c>
+  - <c-dddddd>Can no longer set Lighter color on objects that would freeze the game</c>
+  - <c-dddddd>Somewhat cleaned up UI</c>
+- <c-dddddd>Fix being able to rotate the editor while in a popup or paused</c>
+- <c-dddddd>Add Repeating Editor Button support to color picker arrows</c>
+- <c-dddddd>Make Zoom Ground Fix instant, thanks</c> <c-7e2bb1>@starrydawn72</c>
+- <c-dddddd>Made shake triggers work in the editor</c>
+
+# 1.0.44
+- <c-dddddd>Fix selecting and editing object/editing extras not working if the selection contained a teleport portal</c>
+- <c-dddddd>Move Preview Object Colors button to toolbar when scrollable toolbar is disabled, as it was confusing being Edit Object with no objects selected</c>
+
+# 1.0.43
+- <c-dddddd>Fix inputs registering behind toolbar</c>
+- <c-dddddd>Fix objects with the default color being black showing as white until an object is placed with preview object colors on</c>
+- <c-dddddd>UI Scaling cleanup</c>
+- <c-dddddd>Add Scale Slider Bypass toggle</c>
+- <c-dddddd>Improve teleport portal's linked orange portal interactions</c>
+- <c-dddddd>Fix crash when changing row count with Scrollable Toolbar enabled on iOS</c>
+- <c-dddddd>Add API for other mods to block pinch to zoom if needed</c>
+- <c-dddddd>Add slight distance check for pinch to zoom to not trigger if another mod uses multi gesture actions and needs to disable it beforehand</c>
+
+# 1.0.42
+- <c-dddddd>Fix Grid Controls positioning</c>
+- <c-dddddd>Dynamically reposition object info label as needed</c>
+- <c-dddddd>Temporarily remove copy and paste object string support from iOS due to a Geode bug</c>
+- <c-dddddd>Fix Auto Build Helper not showing on the editor pause layer when show on pause is enabled</c>
+
+# 1.0.41
+- <c-dddddd>Fix a crash when suspending the game while in the editor on iOS and Android</c>
+
+# 1.0.40
+- <c-dddddd>Fix a crash that could happen when typing in the rotation or scale inputs after an object was deleted.</c>
+
+# 1.0.39
+- <c-dddddd>Fix a potential crash with scale and rotate</c>
+- <c-dddddd>Add node ID to hide UI button</c>
+
+# 1.0.38
+- <c-dddddd>Add option to disable screen safe area</c>
+- <c-dddddd>Make Grid Size control position more dynamic, to account for mods adding to the settings menu and different aspect ratios</c>
+- <c-dddddd>Fix crash on iOS when editing spawn remap</c>
+- <c-dddddd>Fix negate input not working</c>
+
+# 1.0.37
+- <c-dddddd>Fix scale undo not working</c>
+- <c-dddddd>Fix scaling multiple objects still being bounded</c>
+- <c-dddddd>Add Higher Precision Scaling</c>
+- <c-dddddd>Rotation Controls now rotate alongside camera rotation</c>
+- <c-dddddd>Holding shift while trying to drag the rotation controls while the camera was rotated now works properly</c>
+- <c-dddddd>Scale Controls now rotate alongside camera rotation</c>
+- <c-dddddd>Added option for keeping the Scale control size constant no matter the editor zoom</c>
+- <c-dddddd>Fix start pos switcher when Auto Pause is enabled in the editor</c>
+- <c-dddddd>Fix ground scale with Zoom Ground Fix when switching start positions</c>
+- <c-dddddd>Fix Area Trigger corruption with start positions (vanilla bug)</c>
+- <c-dddddd>Prevent "Who Added This" mod from spamming notifications when pressing shift</c>
+
+# 1.0.36
+- <c-dddddd>Fix scale input not scaling Y</c>
+- <c-dddddd>Fix scale ratio not being preserved when using the scale slider</c>
+- <c-dddddd>Change default scale snap to 0.25</c>
+- <c-dddddd>Remove Grid Controls from 32-bit android due to crashes</c>
+- <c-dddddd>Improve Scale Slider performance</c>
+- <c-dddddd>Hopefully fixes the disappearing tab issue once and for all. Please update EditorTab API alongside this</c>
+- <c-dddddd>Fix some text input issues</c>
+
+# 1.0.35
+- <c-dddddd>Fix scale sliders being draggable while disabled</c>
+- <c-dddddd>(Maybe) Fix Grid Controls crashing on 32-bit Android devices</c>
+- <c-dddddd>Add Hide All option for Hide UI toggle, to hide the playtest and pause buttons as well</c>
+- <c-dddddd>Increase hitbox of Hide UI toggle</c>
+- <c-dddddd>You can now click anywhere when the UI is hidden, touch is not blocked at the bottom of the screen</c>
+- <c-dddddd>Hiding UI and then selecting something no longer makes the tabs reappear</c>
+- <c-dddddd>Fixed an issue where clicking on a text input would click what is behind it</c>
+- <c-dddddd>Fixed some keybinds registering on release</c>
+- <c-dddddd>Added some keybinds</c>
+  - <c-dddddd>Toggle UI Visibility</c>
+  - <c-dddddd>Increase Grid Size</c>
+  - <c-dddddd>Decrease Grid Size</c>
+  - <c-dddddd>Show Scale Controls</c>
+  - <c-dddddd>Show Scale XY Controls</c>
+  - <c-dddddd>Show Warp Controls</c>
+  - <c-dddddd>Move Object Half</c>
+  - <c-dddddd>Move Object Big</c>
+
+# 1.0.34
+- <c-dddddd>Disable pinch to rotate by default due to the following feedback:</c>
+  - <c-dddddd>"EW EWWWW THE TINKER UPDATE MADE THE CAMERA TURN WHEN YOU ZOOM OUT"</c>
+  - <c-dddddd>"Trash! Destory it"</c>
+  - <c-dddddd>"Oh ye I downloaded that mod to try it out and deleted it in 5 mins"</c>
+  - <c-dddddd>"There's no checkbox to disable it" (There is)</c>
+  - <c-dddddd>"Same here but i deleted it in 1 mins, Trash mod"</c>
+  - <c-dddddd>"thats vile thats disgusting"</c>
+  - <c-dddddd>"Why would they added that shit"</c>
+- <c-dddddd>Fix not being able to type precise scales close to 1</c>
+
+# 1.0.33
+- <c-dddddd>Fix a crash that happens when Editor Rotation was disabled</c>
+
+# 1.0.32
+- <c-dddddd>Fix the delete tab position being different levels of wonky for different people</c>
+- <c-dddddd>Rework some UI scaling stuff to hopefully prevent that issue in the future</c>
+- <c-dddddd>Cleanup some touch code</c>
+- <c-dddddd>Replace some BE features altogether rather than disabling</c>
+  - <c-dddddd>Improved Scale and Rotate controls</c>
+  - <c-dddddd>Hide UI Toggle</c>
+  - <c-dddddd>Grid Size Controls</c>
+- <c-dddddd>Clean up remnants of old scale control code that broke bypass</c>
+
+# 1.0.30 & 1.0.31
+- <c-dddddd>Fix edit tab scale and delete tab height if free move is enabled and you tap the screen</c>
+
+# 1.0.29
+- <c-dddddd>Fix unfocusing while in full screen not pausing audio</c>
+
+# 1.0.28
+- <c-dddddd>Make SingleDeselect better when clicking the same position</c>
+- <c-dddddd>Add a module logs toggle</c>
+- <c-dddddd>Fix search tab position on mobile</c>
+- <c-dddddd>Fix delete tab position</c>
+- <c-dddddd>Fix some UI scaling issues</c>
+
+### BetterEdit ports Part 1
+
+*These will only show when BetterEdit is disabled*
+
+---
+
+- <c-dddddd>Add Hide UI Toggle</c>
+- <c-dddddd>Add Improved Scale and Rotate controls</c>
+- <c-dddddd>Add Zoom Text</c>
+- <c-dddddd>Add Grid Size Controls</c>
+- <c-dddddd>Add LDM Object Count</c>
+- <c-dddddd>Add Copy object string to clipboard</c>
+- <c-dddddd>Add Hide Trigger UI</c>
+- <c-dddddd>Add Pinch to Zoom</c>
+
+# 1.0.27
+- <c-dddddd>Hackily fix toolbar tab position by setting it on a schedule (I still don't get what causes this rare bug)</c>
+- <c-dddddd>Fix layer locking not being respected when selecting</c>
+- <c-dddddd>Fix edit tab visibility when deselecting objects with single deselect</c>
+
+# 1.0.26
+- <c-dddddd>Fix some crashes</c>
+- <c-dddddd>Clean up UI Scaling</c>
+- <c-dddddd>Fix Preview Object Colors button being positioned off screen with UI scaling disabled</c>
+- <c-dddddd>Fix ground and middleground colors not updating when toggling preview mode off</c>
+
+# 1.0.25
+- <c-dddddd>Add NaN/Infinity object position (`GJBaseGameLayer::addToSection`) crash fix for the Editor (Vanilla bug)</c>
+- <c-dddddd>Add Improved Group View support for Sequence Triggers</c>
+- <c-dddddd>Fix toggle trigger visibility when the trigger is meant to be hidden (Vanilla bug)</c>
+- <c-dddddd>Remove an unneeded log</c>
+- <c-dddddd>Scroll rewrite no longer interferes with DevTools</c>
+- <c-dddddd>Add keybind to open search tab</c>
+- <c-dddddd>Add keybind to set editor rotation back to 0</c>
+- <c-dddddd>Improve object search algorithm some more</c>
+- <c-dddddd>Fix blending not working if set by a color trigger before a start position (Vanilla bug)</c>
+- <c-dddddd>Fix undo not working properly with Single Deselect</c>
+- <c-dddddd>Maybe fix rare bug where the toolbar will be at a weird y position</c>
+- <c-dddddd>Add option to skip disabled Start Positions when switching</c>
+
+# 1.0.24
+- <c-dddddd>Fix a crash when playtesting</c>
+
+# 1.0.23
+- <c-dddddd>Add editor touch fix, useful for mobile users where touch stops working when dragging the camera and pressing playtest at the same time (Vanilla bug)</c>
+- <c-dddddd>Add no touch fix when pasting object state. Fixes no touch not working until reopening the editor for those objects (Vanilla bug)</c>
+- <c-dddddd>Improved Group View now works for Spawn remap and Advanced Random Triggers</c>
+- <c-dddddd>Add Mixed Edit Extras visualization, darker button signifies a mixed checkbox</c>
+
+# 1.0.22
+- <c-dddddd>Fix preview object colors inheriting color channel 1 opacity and blending when default is set</c>
+
+# 1.0.21
+- <c-dddddd>Actually fix the link controls position on mobile</c>
+- <c-dddddd>Fix tooltips showing when dragging the camera on mobile</c>
+
+# 1.0.20
+- <c-dddddd>Fix some features no longer working when entering the editor</c>
+- <c-dddddd>Fix hovering CreateMenuItems when alerts are visible</c>
+- <c-dddddd>Fix CreateMenuItems being dimmed when dragging in the editor area</c>
+- <c-dddddd>Toolbar blurring now applies to popups from Object Groups</c>
+- <c-dddddd>Fixed opacity being wrong with Preview Object Colors enabled</c>
+
+# 1.0.19
+- <c-dddddd>Fix an issue with Editor start pos switcher not loading initial start positions</c>
+
+# 1.0.18
+- <c-dddddd>Fix editor slider not updating when camera moves from scroll and centering</c>
+- <c-dddddd>Add button to lock camera to music playback</c>
+- <c-dddddd>Add fix where the ground position is weird when zooming (Vanilla bug)</c>
+- <c-dddddd>Clean up module system a bit</c>
+- <c-dddddd>Rework Quick Extras to be cleaner</c>
+- <c-dddddd>Add Object Groups version check</c>
+- <c-dddddd>Fix link controls position on mobile</c>
+- <c-dddddd>Fix Preview Object Colors affecting objects that are black by default when no color is set</c>
+- <c-dddddd>Fixed opacity not working with Preview Object Colors</c>
+- <c-dddddd>Object Search no longer renders objects separately</c>
+- <c-dddddd>Preview Object Colors now works in the search tab</c>
+- <c-dddddd>Improve Object Search to group objects by tab, tab with most results shows at front</c>
+- <c-dddddd>Require editor restart when toggling toolbar blur due to potential crash</c>
+- <c-dddddd>Smooth scroll speed now ignores speedhack</c>
+- <c-dddddd>Fix Edit Extras not showing for text objects</c>
+
+# 1.0.17
+- <c-dddddd>Duration Drag no longer shows if duration lines are disabled</c>
+- <c-dddddd>Fix dotted line and pulse line colors when duration drag is enabled</c>
+
+# 1.0.16
+- <c-dddddd>Fix a crash when you have one negative editor layer and one positive editor layer on an object</c>
+- <c-dddddd>Remove editor pause escape keybind for MacOS due to weird crashes</c>
+
+# 1.0.15
+- <c-dddddd>Fix a crash</c>
+
+# 1.0.14
+- <c-dddddd>Account for iOS safe areas</c>
+- <c-dddddd>Live colors now adjusts positions relative to the tab rather than floating so high</c>
+- <c-dddddd>Zoom to cursor now zooms to the correct position when the editor is rotated</c>
+- <c-dddddd>Disabling Editor Rotation should now properly update the rotation of the slider button</c>
+- <c-dddddd>Add Grid Invert opacity setting</c>
+- <c-dddddd>Fix GJDropDownLayers not blocking input properly, and also being skipped on the unpause check</c>
+- <c-dddddd>Fix tooltips persisting when editor is paused</c>
+- <c-dddddd>Fix tooltip highlight persisting when the tooltip is reset</c>
+- <c-dddddd>Rework Search Tab positioning on mobile to be more consistent</c>
+- <c-dddddd>Object summary's cosmetic random rotation no longer changes on filter change</c>
+- <c-dddddd>Teleport portals in the object summary no longer cause Editor Sounds to play a sound</c>
+- <c-dddddd>Teleport portals in the object summary can now be distinguished from unlinked teleport portals</c>
+- <c-dddddd>Preview object colors button no longer shows on the search tab (as it is not functional there)</c>
+- <c-dddddd>The object ID on tooltips (when enabled) no longer show if the ID is 0</c>
+- <c-dddddd>Object Tooltips no longer show on custom objects</c>
+
+# 1.0.13
+- <c-dddddd>Fix Edit Extras not updating properly</c>
+
+# 1.0.12
+- <c-dddddd>Fix top align UI scaling setting not updating</c>
+- <c-dddddd>Fix pause menu scaling not updating when UI scale is turned off </c>
+- <c-dddddd>Fix Named Editor Layers mod alignment issues</c>
+- <c-dddddd>Fix IDs not showing in search with ObjectIDDisplay mod</c>
+- <c-dddddd>Add `tinker::api::ui_scaling::UIScaleUpdated` and `tinker::api::ui_scaling::PauseUIScaleUpdated` for other mods to listen to if they wish to account for UI scaling</c>
+- <c-dddddd>Fix Awesome modifier icons letter showing on the Object Groups category when it shouldn't</c>
+- <c-dddddd>Update about and readme</c>
+
+# 1.0.11
+- <c-dddddd>Fixes for Object Groups</c>
+  - <c-dddddd>Scaling is correct for pinned groups now</c>
+  - <c-dddddd>Pinned Groups no longer jitter when dragged</c>
+  - <c-dddddd>Fixed crash when adding or deleting object groups</c>
+  - <c-dddddd>Fixed crash when hovering over a deleted object in a group</c>
+  - <c-dddddd>Reposition object groups settings and object find button</c>
+  - <c-dddddd>Find button now scrolls to the object properly, and shows the circle wave animation</c>
+- <c-dddddd>Add my own responsive UI scaling settings</c>
+- <c-dddddd>Fix transform controls not updating when centering objects to camera</c>
+- <c-dddddd>Fix Object Search lazy loading not working when a search result had less than `rows * columns` items</c>
+
+# 1.0.10
+- <c-dddddd>Fix a crash when selecting triggers with insane duration amounts</c>
+- <c-dddddd>Fix align button alignment (lol) being wrong sometimes</c>
+- <c-dddddd>Fix a mistake in the description</c>
+- <c-dddddd>Fix scale of object groups popup</c>
+
+# 1.0.9
+- <c-dddddd>Object Groups compatibility fixes for Scrollable Toolbar, Object Tooltips, and Search</c>
+
+# 1.0.8
+- <c-dddddd>Add Blur Behind option for Custom Toolbar Background when Blur API is installed</c>
+- <c-dddddd>Fix quick extras button being positioned weirdly after pausing a playtest</c>
+- <c-dddddd>Fix another BetterEdit bug unrelated to Tinker</c>
+- <c-dddddd>Revert icon</c>
+
+# 1.0.7
+- <c-dddddd>Fix a leak causing a crash when pressing space while the Gen Color Triggers mod is installed</c>
+
+# 1.0.6
+- <c-dddddd>Fix a crash when placing start positions while start position switcher is disabled</c>
+
+# 1.0.5
+- <c-dddddd>Change the icon so people stop complaining that it's too detailed, "liquid ass", looks bad, etc.</c>
+
+# 1.0.4
+- <c-dddddd>Fix a crash</c>
+
+# 1.0.3
+- <c-dddddd>Fix misnamed setting for Object Search</c>
+- <c-dddddd>More performance fixes</c>
+- <c-dddddd>Toggling Length In Editor now updates the time properly</c>
+- <c-dddddd>Live Colors now properly updates with default color IDs when objects are placed</c>
+- <c-dddddd>Add selection amount for Paste Confirmation</c>
+- <c-dddddd>Add disabling Paste Confirmation for objects with no groups and color set</c>
+
+# 1.0.2
+- <c-dddddd>Fix a crash</c>
+- <c-dddddd>Speed up Object Search loading</c>
+
+# 1.0.1
+- <c-dddddd>Rewrite zoom logic to hopefully resolve some bugs</c>
+- <c-dddddd>Lazy load search tab</c>
+
+# 1.0.0
+- <c-dddddd>New visual identity</c>
+- <c-dddddd>Updated mod information to include everything that is missing</c>
+- <c-dddddd>Move out of Beta</c>
+- <c-dddddd>Fix edit tab sorting with Scrollable Toolbar enabled</c>
+
+# 1.0.0-beta.42
+- <c-dddddd>Improve settings performance</c>
+- <c-dddddd>Implement my own actually *good* search for settings</c>
+- <c-dddddd>Fix scrolling working during playtest</c>
+- <c-dddddd>Fix edit special being inaccessible for User Coins and Gold Coins</c>
+- <c-dddddd>Add more keybinds</c>
+
+# 1.0.0-beta.41
+- <c-dddddd>Fix template blocks not having edit special when selected with something else</c>
+- <c-dddddd>Fix settings not expanding properly when switching tabs (I think)</c>
+
+# 1.0.0-beta.40
+- <c-dddddd>Fix settings scroll layout not being updated properly</c>
+- <c-dddddd>Fix a crash</c>
+
+# 1.0.0-beta.39
+- <c-dddddd>Rework Geode Settings</c>
+
+# 1.0.0-beta.38
+- <c-dddddd>Fix search height being too low for devices where the virtual keyboard height is misrepresented</c>
+- <c-dddddd>Cleanup startpos switcher code some more</c>
+- <c-dddddd>Default start position selection should now respect if a start pos is disabled, and will only disrespect it when it is used/switched to</c>
+
+# 1.0.0-beta.37
+- <c-dddddd>Improve Quick extras inclusions and exclusions</c>
+- <c-dddddd>Fix rotating camera and dragging at same time</c>
+- <c-dddddd>Add node ID to playtest without startpos button</c>
+
+# 1.0.0-beta.36
+- <c-dddddd>Add editor grid customization</c>
+  - <c-dddddd>Color customization</c>
+  - <c-dddddd>Grid Invert Behind option</c>
+  - <c-dddddd>Effect lines match trigger color option</c>
+  - <c-dddddd>Rainbow Music Line option :3</c>
+- <c-dddddd>Fix crash when placing start position with Start Pos Tools disabled</c>
+
+# 1.0.0-beta.35
+- <c-dddddd>Fix a crash</c>
+
+# 1.0.0-beta.34
+- <c-dddddd>Fix duration drag being broken if the duration is negative</c>
+- <c-dddddd>Fix start pos switching when there are no start positions</c>
+- <c-dddddd>Adding positions via Clean Start Pos updates the label now</c>
+- <c-dddddd>Added `restart` and `restart without start positions` keybinds for the editor</c>
+
+# 1.0.0-beta.33
+- <c-dddddd>Fix a crash</c>
+
+# 1.0.0-beta.32
+- <c-dddddd>Fix startpos switcher just not working consistently</c>
+- <c-dddddd>Add playtest confirmation option</c>
+
+# 1.0.0-beta.31
+- <c-dddddd>Make playtest act like vanilla again, and turn the playtest from start pos button into a playtest without start pos button (Swapping the behavior)</c>
+- <c-dddddd>Make scroll delegation an option for compatibility sake, off by default</c>
+
+# 1.0.0-beta.30
+- <c-dddddd>Fix typo in changelog</c>
+- <c-dddddd>Only use scroll event to get points, trigger on scrollWheel call still</c>
+- <c-dddddd>Add editor start pos switcher</c>
+
+# 1.0.0-beta.29
+- <c-dddddd>Add setting to make pressing enter start at a start position instead of the start of the level</c>
+- <c-dddddd>Add customizing toolbar gradient and line colors</c>
+
+# 1.0.0-beta.28
+- <c-dddddd>Fix a crash when pressing enter to playtest</c>
+- <c-dddddd>Fix playtest menu when BetterEdit is disabled</c>
+
+# 1.0.0-beta.27
+- <c-dddddd>Fix cycling start position selections not working consistently</c>
+- <c-dddddd>Fix the start pos playtest button showing under the ground</c>
+- <c-dddddd>Add always show negate button option</c>
+- <c-dddddd>Better compatibility with Lasso Select (future update to Lasso Select needed)</c>
+- <c-dddddd>Add ability to playtest from start, separate starting from start pos to a separate button</c>
+- <c-dddddd>Fix D blocks not working with the ignore damage fix</c>
+- <c-dddddd>Fix deleting all start positions still allowing you to start from a ghost start position</c>
+- <c-dddddd>Fix color preview showing on bottom right of CustomizeObjectLayer when it shouldn't</c>
+- <c-dddddd>Add node ID to tinker button in pause menu</c>
+
+# 1.0.0-beta.26
+- <c-dddddd>Fix preview object colors affecting object search permanently</c>
+- <c-dddddd>Fix object search loading circle position</c>
+- <c-dddddd>Add start playtest from startpos button</c>
+- <c-dddddd>Allow wave to clip through slopes when ignore damage is enabled</c>
+- <c-dddddd>Only show negate button when text field is focused</c>
+- <c-dddddd>Make some changes to Editor Rotation to hopefully prevent objects being rotated when they shouldn't be</c>
+- <c-dddddd>Placing custom objects should work properly now when the editor is rotated</c>
+- <c-dddddd>Add node ID to live colors menu</c>
+
+# 1.0.0-beta.25
+- <c-dddddd>Disable scroll on tabs that don't have many buttons</c>
+- <c-dddddd>Increase tab scroll delta on mobile</c>
+- <c-dddddd>Check if slider in editor actually exists</c>
+
+# 1.0.0-beta.24
+- <c-dddddd>Free move now works when the camera is rotated</c>
+- <c-dddddd>Added button and keybind to move selected objects to your editor position</c>
+- <c-dddddd>Added button and keybind to move your editor position to selected objects</c>
+- <c-dddddd>Make letting go of shift before mouse when swiping stopping swipe an option</c>
+- <c-dddddd>Hackily make quick volume controls work with my scroll rewrite</c>
+- <c-dddddd>Block scroll when paused</c>
+
+# 1.0.0-beta.23
+- <c-dddddd>Make object search items load while in the editor rather than on level load. Load rate can be customized in settings</c>
+
+# 1.0.0-beta.22
+- <c-dddddd>Adjust scrolling to account for natural scrolling on MacOS</c>
+- <c-dddddd>Fix rotating objects not being snapped to grid when camera is rotated</c>
+- <c-dddddd>Add alignment keybind for Editor Rotation</c>
+- <c-dddddd>Fix offset objects not being rotated correctly when the editor is rotated</c>
+- <c-dddddd>Add zoom bound settings</c>
+
+# 1.0.0-beta.21
+- <c-dddddd>Fix a BetterEdit bug with text inputs staying focused and blocking keybinds to prevent Tinker from being blamed for it</c>
+
+# 1.0.0-beta.20
+- <c-dddddd>Fix crash with Named Editor Groups</c>
+- <c-dddddd>Fix crash with Joystick when Editor Rotation is disabled</c>
+- <c-dddddd>Fix `control` keybind conflict with pasting objects with Single Deselect</c>
+- <c-dddddd>Fix camera dragging with Editor Rotation when playtest is active but paused</c>
+- <c-dddddd>Add Editor Rotation right click drag toggle, in case right click just isn't your thing but still want the fixed movement or to use the joystick.</c>
+
+# 1.0.0-beta.19
+- <c-dddddd>Fix missing bounds for scrolling</c>
+- <c-dddddd>Fix potential divide by 0 issue with zoom</c>
+- <c-dddddd>Add invert vertical and horizontal scroll settings</c>
+- <c-dddddd>Add invert scroll setting for scrollable toolbars</c>
+- <c-dddddd>Allow disabling zoom to cursor</c>
+- <c-dddddd>Fix mac scrolling (I think)</c>
+- <c-dddddd>Fix letting go of shift keeping swipe active</c>
+- <c-dddddd>Fix selection bounds on rotated objects</c>
+- <c-dddddd>Added repositioning check if the editor camera seems to be invalid</c>
+
+# 1.0.0-beta.18
+- <c-dddddd>Fix transform control buttons in Improved Transform Controls not being clickable</c>
+- <c-dddddd>Fix a crash when Improved Transform Controls was clicked outside its bounds</c>
+- <c-dddddd>Fix a crash when scrolling on the toolbar with scrollable toolbar disabled</c>
+- <c-dddddd>Transform control buttons should now work with Canvas Rotation</c>
+
+# 1.0.0-beta.17
+- <c-dddddd>Fix some settings failing to apply</c>
+- <c-dddddd>Fix feature names being wrong when applying</c>
+- <c-dddddd>Fix another crash with Improved Transform Controls</c>
+
+# 1.0.0-beta.16
+- <c-dddddd>Fix modifier icons letter never being hidden when the setting is off (again)</c>
+
+# 1.0.0-beta.15
+- <c-dddddd>Tweak scroll delta in Improved Group View</c>
+- <c-dddddd>Fix missing vanilla group offset button</c>
+- <c-dddddd>Add scrollbar height and y offset settings for Scrollable Toolbar</c>
+- <c-dddddd>Add settings button in the editor pause menu</c>
+- <c-dddddd>Fix the editor not having scroll when the color select and hsv popup is visible</c>
+- <c-dddddd>Fix locked layers not being respected</c>
+- <c-dddddd>Reimplement editor scroll altogether to make it easier to deal with (trackpad scroll probably works on windows now, haven't tested)</c>
+- <c-dddddd>Add option for smooth scroll and zoom in the editor</c>
+- <c-dddddd>Add option for scroll and zoom multipliers</c>
+- <c-dddddd>Make the selection box stick to the object layer</c>
+- <c-dddddd>Fix Improved Transform Controls crash and button scale</c>
+- <c-dddddd>Fix Modifier Icon letter never being hidden when the setting is off</c>
+- <c-dddddd>Add keybind for Edit Extras</c>
+- <c-dddddd>Add scroll modifier keybind and multiplier for the scrollable tabs</c>
+- <c-dddddd>Allow scroll while mouse is hovered in the edit tab when BetterEdit's custom move menu is enabled, and delete tab</c>
+
+# 1.0.0-beta.14
+- <c-dddddd>Infinite zoom now works with BetterEdit again</c>
+- <c-dddddd>Fix horizontal scroll breaking</c>
+- <c-dddddd>Fix scrolling on Mac</c>
+- <c-dddddd>Disable repeat on reference image button</c>
+
+# 1.0.0-beta.13
+- <c-dddddd>Hotfix for changing any setting causing a crash when opening the editor</c>
+
+# 1.0.0-beta.12
+- <c-dddddd>Hotfix for BetterEdit Edit Menu breaking</c>
+
+# 1.0.0-beta.11
+- <c-dddddd>Fix some broken sprites when not using high quality textures</c>
+- <c-dddddd>Tooltips are now higher on mobile</c>
+- <c-dddddd>Tooltips will now fade when button is scrolled outside of view</c>
+- <c-dddddd>Fix tooltips persisting when switching modes while clicked</c>
+- <c-dddddd>Fix tooltips instantly fading when not using scrollable objects on mobile</c>
+- <c-dddddd>Fix tooltips causing button opacity to stay lowered on mobile</c>
+- <c-dddddd>Fix tooltips height being inconsistent and changing if the button scales</c>
+- <c-dddddd>Add a selection limit of 100 to duration dragging</c>
+- <c-dddddd>Improve duration dragging performance</c>
+- <c-dddddd>Fix duration dragging breaking when the editor is rotated</c>
+- <c-dddddd>Fix duration drag slider not being visible after pasting objects</c>
+- <c-dddddd>Fix repeating editor buttons not working with BetterEdit's move menu</c>
+- <c-dddddd>Fix selection being broken when Canvas Rotate is enabled</c>
+- <c-dddddd>Add missing node IDs for object search</c>
+- <c-dddddd>Fix hold to swipe location being wrong when the editor is rotated</c>
+
+## Known Issues
+- <c-bfbf56>Scroll on Mac is inverted</c>
+- <c-bfbf56>Rotate and Zoom gestures do not work on mobile</c>
+- <c-bfbf56>Infinite Zoom hacks/mods do not work with Tinker currently</c>
+- <c-bfbf56>Edit tab organization is terrible with scrollable tabs enabled</c>
+
+# 1.0.0-beta.10
+- <c-dddddd>Fix Duration Dragging lines showing when disabled</c>
+- <c-dddddd>Fix Live Colors menu showing under search if you pause and unpause</c>
+- <c-dddddd>Always force BetterEdit move tab reload to fix invisible buttons</c>
+- <c-dddddd>Clean up some queued methods to hopefully fix a crash</c>
+- <c-dddddd>Fix a typo in the settings</c>
+- <c-dddddd>Fix link controls position and sizing on mobile</c>
+- <c-dddddd>Add Object Tooltip Scale setting</c>
+- <c-dddddd>Make Tooltips visible on mobile</c>
+- <c-dddddd>Fix clicking on objects not bringing you to the right tab in the build menu</c>
+
+# 1.0.0-beta.9
+- <c-dddddd>Fix Auto "Build Helper" not working</c>
+- <c-dddddd>Save Auto "Build Helper" toggle state</c>
+- <c-dddddd>Fix Paste Warnings showing when clicking the buttons while they are disabled</c>
+- <c-dddddd>Adjust scroll delta to prevent accidental scrolling when clicking an object in the build tab</c>
+- <c-dddddd>Remove broken Split button with Multi Text Edit as it crashes. May reimplement in the future</c>
+
+# 1.0.0-beta.8
+- <c-dddddd>Depend on Better Touch Prio
+
+# 1.0.0-beta.7
+- <c-dddddd>Fix BetterEdit's edit menu buttons being invisible</c>
+- <c-dddddd>Clean up Object Search UI on mobile</c>
+
+# 1.0.0-beta.6
+- <c-dddddd>Fix Platformer Control Touch in Editor when Canvas Rotation is enabled</c>
+- <c-dddddd>Fix Edit Object not opening preview object colors selection when Scrollable Objects is disabled</c>
+- <c-dddddd>Fix Group View touch not working</c>
+- <c-dddddd>Fix Culling if row count was not 3</c>
+- <c-dddddd>Fix Search Bar touch not working</c>
+- <c-dddddd>Fix Edit Extras not showing when multiple objects were selected that cannot be edited with Edit Special</c>
+- <c-dddddd>Fix Editing multiple objects</c>
+- <c-dddddd>Fix Object Summary Description</c>
+- <c-dddddd>Add setting to make Edit Extras always show</c>
+- <c-dddddd>Add button to reset Joystick position in settings</c>
+- <c-dddddd>Add setting to lock Joystick position</c>
+- <c-dddddd>Disable automatic text focus in the Object Search tab on mobile</c>
+
+## Known Issues
+- <c-bfbf56>Something can cause missing buttons in the Edit tab when BetterEdit is enabled and some other unknown mod (looking into).</c>
+- <c-bfbf56>Object Search is covered up by the keyboard on mobile.</c>
+- <c-bfbf56>Horizontal Scroll on Mac is inverted</c>
+
+# 1.0.0-beta.5
+- <c-dddddd>Fix Negate Input sprite</c>
+
+# 1.0.0-beta.4
+- <c-dddddd>Fix a crash</c>
+- <c-dddddd>Change Single Deselect to use Keybind</c>
+- <c-dddddd>Fix Reference Image culling</c>
+
+# 1.0.0-beta.3
+- <c-dddddd>Fix search input memory leak and crash</c>
+
+# 1.0.0-beta.2
+- <c-dddddd>Fix a few Reference Image bugs</c>
+
+# 1.0.0-beta.1
+- <c-dddddd>Initial Release.</c>
