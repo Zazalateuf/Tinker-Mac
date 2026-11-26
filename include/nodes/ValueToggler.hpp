@@ -1,0 +1,103 @@
+#pragma once
+
+#include <Geode/cocos/robtop/keyboard_dispatcher/CCKeyboardDispatcher.h>
+#include <Geode/ui/Label.hpp>
+#include <Geode/ui/NineSlice.hpp>
+#include <Geode/utils/function.hpp>
+#include <Geode/binding/CCMenuItemSpriteExtra.hpp>
+#include <vector>
+
+namespace tinker::ui {
+
+template<class T>
+class ValueToggler : public CCMenuItemSpriteExtra {
+public:
+    static ValueToggler* create(geode::Function<void(float)> callback, std::vector<T> values, size_t defaultIdx) {
+        auto ret = new ValueToggler();
+        if (ret->init(std::move(callback), std::move(values), defaultIdx)) {
+            ret->autorelease();
+            return ret;
+        }
+        delete ret;
+        return nullptr;
+    }
+
+    geode::NineSlice* getBackground() {
+        return m_background;
+    }
+
+protected:
+    bool init(geode::Function<void(float)> callback, std::vector<T> values, size_t defaultIdx) {
+        m_callback = std::move(callback);
+        m_values = std::move(values);
+        m_idx = defaultIdx;
+
+        m_background = geode::NineSlice::create("button-empty.png"_spr);
+
+        int precision = 0;
+        float scale = 0.25f;
+        if constexpr (std::is_floating_point_v<T>) {
+            m_background->setContentSize({35.f, 20.f});
+            precision = 2;
+            scale = 0.3f;
+        }
+        else {
+            m_background->setContentSize({20.f, 20.f});
+        }
+
+        m_background->setScaleMultiplier(0.6f);
+        m_background->setID("button-background"_spr);
+        m_background->setCascadeOpacityEnabled(true);
+
+        if (!CCMenuItemSpriteExtra::init(m_background, nullptr, nullptr, nullptr)) return false;
+        setCascadeOpacityEnabled(true);
+
+        m_label = geode::Label::create(geode::utils::numToString<T>(m_values[m_idx], precision).c_str(), "bigFont.fnt");
+        m_label->setPosition(m_background->getContentSize() / 2.f);
+        m_label->setID("value-label"_spr);
+        m_label->setScale(scale);
+
+        m_background->addChild(m_label);
+
+        setOpacity(127);
+        setEnabled(false);
+        if (m_callback) m_callback(m_values[m_idx]);
+
+        return true;
+    }
+
+    void updateLabel() {
+        int precision = 0;
+        if constexpr (std::is_floating_point_v<T>) {
+            precision = 2;
+        }
+        m_label->setString(geode::utils::numToString<T>(m_values[m_idx], precision).c_str());
+    }
+
+    void activate() override {
+        CCMenuItemSpriteExtra::activate();
+        if (cocos2d::CCKeyboardDispatcher::get()->getAltKeyPressed()) {
+            m_idx--;
+            if (m_idx < 0) {
+                m_idx = m_values.size() - 1;
+            }
+        }
+        else {
+            m_idx++;
+            if (m_idx >= m_values.size()) {
+                m_idx = 0;
+            }
+        }
+
+        updateLabel();
+        if (m_callback) m_callback(m_values[m_idx]);
+    }
+
+    int m_idx = 0;
+    geode::Label* m_label = nullptr;
+    geode::NineSlice* m_background = nullptr;
+    geode::Function<void(float)> m_callback = nullptr;
+    std::vector<T> m_values{};
+};
+
+}

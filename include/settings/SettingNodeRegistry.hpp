@@ -1,0 +1,30 @@
+#pragma once
+
+#include <Geode/loader/SettingV3.hpp>
+#include <Geode/utils/StringMap.hpp>
+#include <Geode/utils/ZStringView.hpp>
+#include <memory>
+#include "utils/Singleton.hpp"
+
+namespace tinker::settings {
+
+class SettingNodeBase;
+
+struct SettingNodeRegistry : public Singleton<SettingNodeRegistry> {
+
+    geode::utils::StringMap<std::function<SettingNodeBase*(float, std::shared_ptr<geode::SettingV3>)>> m_settingNodes{};
+
+    static SettingNodeBase* create(geode::ZStringView type, float width, std::shared_ptr<geode::SettingV3> setting) {
+        auto& nodes = SettingNodeRegistry::get()->m_settingNodes;
+        auto iter = nodes.find(type);
+        if (iter == nodes.end()) {
+            //log::warn("Unknown setting type: \"{}\" for \"{}\"", type, setting->getKey());
+            return SettingNodeRegistry::get()->m_settingNodes["mirror"](width, setting);
+        }
+
+        //log::debug("Loaded setting type: \"{}\" for \"{}\"", type, setting->getKey());
+        return iter->second(width, setting);
+    }
+};
+
+}

@@ -1,0 +1,39 @@
+#pragma once
+
+#include <Geode/cocos/base_nodes/CCNode.h>
+#include <Geode/cocos/cocoa/CCGeometry.h>
+#include <Geode/ui/NineSlice.hpp>
+#include <alphalaneous.alphas-ui-pack/API.hpp>
+#include <map>
+
+using namespace alpha::prelude;
+
+namespace tinker::ui {
+
+enum class SummarySortType {
+    None = -1,
+    Solids,
+    Hazards,
+    Decoration,
+    Portals,
+    PadsOrbs,
+    Triggers
+};
+
+struct SortOptions {
+    SummarySortType sortType = SummarySortType::None;
+    bool isAscending = false;
+    bool showHidden = true;
+};
+
+class ObjectList : public cocos2d::CCNode {
+public:
+    static ObjectList* create(const std::map<int, int>& objects, SortOptions sortOptions, const cocos2d::CCSize& size);
+protected:
+    bool init(const std::map<int, int>& objects, SortOptions sortOptions, const cocos2d::CCSize& size);
+
+    AdvancedScrollLayer* m_list = nullptr;
+    geode::NineSlice* m_bg = nullptr;
+};
+
+}
