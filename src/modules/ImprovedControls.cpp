@@ -2,6 +2,9 @@
 #include <Geode/binding/EditorUI.hpp>
 #include <Geode/binding/LevelEditorLayer.hpp>
 #include <algorithm>
+#include <array>
+#include <cstdio>
+#include <cstdlib>
 #include <alphalaneous.alphas-ui-pack/Utils.hpp>
 #include "Events.hpp"
 #include "Geode/cocos/touch_dispatcher/CCTouchDispatcher.h"
@@ -97,15 +100,20 @@ int ImprovedControls::getPrecisionFromString(geode::ZStringView str) {
 }
 
 std::string toShortestExactString(float value) {
+    // std::to_chars(float) is unavailable on macOS < 13.3, so find the shortest
+    // representation that round-trips back to the same float manually.
     std::array<char, 64> buffer;
 
-    auto [end, ec] = std::to_chars(
-        buffer.data(),
-        buffer.data() + buffer.size(),
-        value
-    );
+    for (int decimals = 0; decimals <= 9; decimals++) {
+        int written = std::snprintf(buffer.data(), buffer.size(), "%.*f", decimals, static_cast<double>(value));
+        if (written <= 0 || written >= static_cast<int>(buffer.size())) return "";
 
-    return ec == std::errc{} ? std::string(buffer.data(), end) : "";
+        if (std::strtof(buffer.data(), nullptr) == value || decimals == 9) {
+            return std::string(buffer.data(), static_cast<size_t>(written));
+        }
+    }
+
+    return "";
 }
 
 int ImprovedControls::getPrecisionFromFloat(float value) {
@@ -825,6 +833,7 @@ CCPoint ICGJScaleControl::getPivotLocation() {
     return position;
 }
 
+#ifndef GEODE_IS_MACOS
 void ICGJScaleControl::onApplyScale(cocos2d::CCObject* sender) {
     auto fields = m_fields.self();
 
@@ -863,6 +872,7 @@ void ICGJScaleControl::onApplyScale(cocos2d::CCObject* sender) {
 
     updatePrecision();
 }
+#endif
 
 void ICGJScaleControl::loadValues(GameObject* obj, CCArray* objs, std::unordered_map<int, GameObjectEditorState>& states) {
     GJScaleControl::loadValues(obj, objs, states);
