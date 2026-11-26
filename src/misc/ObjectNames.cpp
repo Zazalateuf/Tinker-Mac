@@ -1,0 +1,156 @@
+#include "misc/ObjectNames.hpp"
+#include "utils/String.hpp"
+
+void ObjectNames::checkNames(bool ignoreVersion) {
+    auto req = web::WebRequest();
+
+    m_listener.spawn(
+        req.get("https://raw.githubusercontent.com/Alphalaneous/GDObjectNames/refs/heads/main/version"),
+        [this, ignoreVersion] (web::WebResponse value) {
+            if (value.error()) {
+                loadNamesFromFile();
+                return;
+            }
+
+            auto strRes = value.string();
+            if (!strRes) {
+                loadNamesFromFile();
+                return;
+            }
+
+            auto numRes = numFromString<unsigned int>(strRes.unwrap());
+            if (!numRes) {
+                loadNamesFromFile();
+                return;
+            }
+
+            auto version = numRes.unwrap();
+
+            if (version > checkVersion() || ignoreVersion) {
+                Mod::get()->setSavedValue("ObjectNames/version", version);
+                downloadNames();
+            }
+            else {
+                loadNamesFromFile();
+            }
+        }
+    );
+}
+
+void ObjectNames::loadNames(ZStringView names) {
+    auto split = utils::string::split(names, "\n");
+    for (const auto& str : split) {
+        auto commaSplit = utils::string::split(str, ",");
+        if (commaSplit.size() != 2) continue;
+
+        auto idRes = numFromString<unsigned int>(commaSplit[0]);
+        if (!idRes) continue;
+
+        m_names[idRes.unwrap()] = commaSplit[1];
+    }
+}
+
+void ObjectNames::loadNamesFromFile() {
+    auto objectNames = Mod::get()->getSaveDir() / "objects.csv";
+
+    if (!objectNames.exists()) {
+        downloadNames();
+        return;
+    }
+
+    auto namesRes = utils::file::readString(objectNames);
+    if (!namesRes) {
+        downloadNames();
+        return;
+    }
+
+    loadNames(namesRes.unwrap());
+}
+
+void ObjectNames::downloadNames() {
+    auto req = web::WebRequest();
+    
+    m_listener.spawn(
+        req.get("https://raw.githubusercontent.com/Alphalaneous/GDObjectNames/refs/heads/main/objects.csv"),
+        [this] (web::WebResponse value) {
+            if (value.error()) {
+                auto objectNames = Mod::get()->getSaveDir() / "objects.csv";
+
+                if (!objectNames.exists()) return;
+                
+                auto namesRes = utils::file::readString(objectNames);
+                if (!namesRes) return;
+
+                loadNames(namesRes.unwrap());
+                return;
+            }
+
+            auto strRes = value.string();
+            if (!strRes) return;
+
+            auto objectNames = Mod::get()->getSaveDir() / "objects.csv";
+            auto writeRes = utils::file::writeString(objectNames, strRes.unwrap());
+            if (!writeRes) {
+                log::error("Failed to write object names");
+            }
+            
+            loadNames(strRes.unwrap());
+        }
+    );
+}
+
+std::string ObjectNames::deduceFromID(ZStringView id) {
+    auto splitSlash = utils::string::split(id, "/");
+    if (splitSlash.empty()) return "Unknown";
+
+    StringBuffer<> str{};
+    auto last = splitSlash[splitSlash.size() - 1];
+
+    auto splitDash = utils::string::split(last, "-");
+    bool first = true;
+    for (const auto& part : splitDash) {
+        if (!first) {
+            str.append(" ");
+        }
+        str.append(tinker::utils::string::capitalize(part));
+        first = false;
+    }
+    return str.str();
+}
+
+Result<ZStringView> ObjectNames::getName(unsigned int id) {
+    if (id >= 100000000) {
+        return Ok("Custom Object");
+    }
+    auto iter = m_names.find(id);
+    if (iter == m_names.end()) return Err("Name not found for ID");
+
+    return Ok(ZStringView(iter->second));
+}
+
+const std::unordered_map<unsigned int, std::string>& ObjectNames::getNames() {
+    return m_names;
+}
+
+int ObjectNames::checkVersion() {
+    return Mod::get()->getSavedValue<unsigned int>("ObjectNames/version", 0);
+}
+
+$on_game(Loaded) {
+    auto objectNames = Mod::get()->getResourcesDir() / "objects.csv";
+
+    if (objectNames.exists()) {
+        auto namesRes = utils::file::readString(objectNames);
+        if (!namesRes) return;
+
+        ObjectNames::get()->loadNames(namesRes.unwrap());
+    }
+
+    ObjectNames::get()->checkNames();
+
+    ButtonSettingPressedEventV3(Mod::get(), "Debug-redownload-object-names").listen([] (auto buttonKey) {
+        if (buttonKey == "redownload") {
+            ObjectNames::get()->checkNames(true);
+        }
+    }).leak();
+}
