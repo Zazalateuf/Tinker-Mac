@@ -9,6 +9,8 @@
 #include "utils/String.hpp"
 #include "utils/UI.hpp"
 
+#include "utils/MacCompat.hpp"
+
 using namespace geode::prelude;
 
 void ReferenceImage::onEditor() {
@@ -79,8 +81,8 @@ bool RICustomizeObjectLayer::init(GameObject* object, CCArray* objectArray) {
 
 void RICustomizeObjectLayer::setTextBtn() {
     auto fields = m_fields.self();
-    auto textObject = typeinfo_cast<TextGameObject*>(m_targetObject);
-    if (!textObject) return;
+    if (!m_targetObject || m_targetObject->m_objectID != 914) return; // objet texte (pas de typeinfo macOS)
+    auto textObject = static_cast<TextGameObject*>(m_targetObject);
 
     auto pair = tinker::utils::string::splitIntoPair(textObject->m_text);
     if (pair.first != "image") return;
@@ -109,7 +111,8 @@ void RICustomizeObjectLayer::onSelectMode(CCObject* sender) {
                 if (!opt) return;
 
                 auto path = opt.value();
-                if (auto textObject = typeinfo_cast<TextGameObject*>(m_targetObject)) {
+                if (m_targetObject && m_targetObject->m_objectID == 914) {
+                    auto textObject = static_cast<TextGameObject*>(m_targetObject);
                     textObject->updateTextObject("image:" + utils::base64::encode(path.string()), false);
                 }
             }
@@ -161,7 +164,7 @@ bool RITextGameObject::isReferenceImage() {
 }
 
 void RITextGameObject::setAttributes() {
-    auto fields = m_fields.self();
+    auto fields = tinker::utils::compat::nodeFields<Fields>(this);
     if (auto node = getChildByID("error-node"_spr)) {
         node->removeFromParent();
     }
@@ -196,7 +199,7 @@ bool RITextGameObject::setupInitial(const std::string& path) {
 
 
 void RITextGameObject::setupImage(const std::string& path) {
-    auto fields = m_fields.self();
+    auto fields = tinker::utils::compat::nodeFields<Fields>(this);
     if (fields->m_spr) fields->m_spr->removeFromParent();
 
     if (LevelEditorLayer::get()) {

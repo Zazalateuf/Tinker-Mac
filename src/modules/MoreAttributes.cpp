@@ -281,7 +281,7 @@ bool MASetupObjectOptions2Popup::init(GameObject* object, cocos2d::CCArray* obje
 }
 
 void MASetupTriggerPopup::createMultiTriggerItems(cocos2d::CCPoint touchPos, cocos2d::CCPoint spawnPos, cocos2d::CCPoint multiPos) {
-    if (typeinfo_cast<SetupAdvFollowPopup*>(this)) {
+    if ((m_gameObject && m_gameObject->m_objectID == 3016)) {
         auto winSize = CCDirector::get()->getWinSize();
         multiPos = CCPoint{winSize.width / 2.f - 200.f, winSize.height / 2.f - 110.f};
     }
@@ -289,7 +289,7 @@ void MASetupTriggerPopup::createMultiTriggerItems(cocos2d::CCPoint touchPos, coc
 }
 
 cocos2d::CCArray* MASetupTriggerPopup::createToggleValueControl(int property, std::string label, cocos2d::CCPoint position, bool vertical, int page, int group, float scale) {
-    if (typeinfo_cast<SetupAdvFollowPopup*>(this)) {
+    if ((m_gameObject && m_gameObject->m_objectID == 3016)) {
         if (property == 571) {
             position.y += 8.5f;
         }
@@ -298,7 +298,7 @@ cocos2d::CCArray* MASetupTriggerPopup::createToggleValueControl(int property, st
 }
 
 cocos2d::CCArray* MASetupTriggerPopup::createCustomToggleValueControl(int property, bool toggled, bool notClickable, std::string text, cocos2d::CCPoint position, bool vertical, int page, int group) {
-    if (typeinfo_cast<SetupAdvFollowPopup*>(this)) {
+    if ((m_gameObject && m_gameObject->m_objectID == 3016)) {
         if (property == 0 || property == 1 || property == 2) {
             position.y += 8.5f;
         }

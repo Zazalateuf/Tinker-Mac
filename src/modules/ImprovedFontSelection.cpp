@@ -5,6 +5,8 @@
 #include <alphalaneous.alphas-ui-pack/API.hpp>
 #include <string>
 
+#include "utils/MacCompat.hpp"
+
 using namespace geode::prelude;
 
 bool ImprovedFontSelection::onToggled(bool state) {
@@ -90,7 +92,7 @@ bool IFSSelectFontLayer2::init(LevelEditorLayer* layer) {
     title->setID("title"_spr);
     m_mainLayer->addChild(title);
 
-    auto fields = m_fields.self();
+    auto fields = tinker::utils::compat::nodeFields<Fields>(this);
 
     fields->m_font = layer->m_levelSettings->m_fontIndex;
 
@@ -229,7 +231,7 @@ ZStringView IFSSelectFontLayer2::fontNameForID(int id) {
 }
 
 void IFSSelectFontLayer2::updateFont(int id) {
-    auto fields = m_fields.self();
+    auto fields = tinker::utils::compat::nodeFields<Fields>(this);
     auto font = fontForID(id);
 
     fields->m_exampleLabel->getPlaceholderLabel()->setFont(font);

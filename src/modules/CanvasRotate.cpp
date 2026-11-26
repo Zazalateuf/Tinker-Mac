@@ -349,9 +349,16 @@ GameObject* CREditorUI::createObject(int objectID, CCPoint position) {
             rotationValue += -m_editorLayer->m_gameState.m_cameraAngle;
         }
         
+#ifdef GEODE_IS_MACOS
+        // EditorUI::applyOffset n'a pas d'adresse macOS dans les bindings 2.2091 :
+        // on évite la paire removeOffset/applyOffset pour ne pas laisser l'objet
+        // dans un état incohérent, et on applique seulement la rotation.
+        ret->setRotation(rotationValue);
+#else
         removeOffset(ret);
         ret->setRotation(rotationValue);
         applyOffset(ret);
+#endif
     }
     
     return ret;

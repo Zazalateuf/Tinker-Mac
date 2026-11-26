@@ -18,6 +18,8 @@
 #include "utils/Constants.hpp"
 #include "utils/String.hpp"
 
+#include "utils/MacCompat.hpp"
+
 using namespace geode::prelude;
 
 void ImprovedControls::addLabelToNode(CCNode* node, ZStringView text) {
@@ -138,7 +140,7 @@ void ICEditorUI::activateRotationControl(CCObject* sender) {
 
     auto control = static_cast<ICGJRotationControl*>(m_rotationControl);
     control->loadValues(arr);
-    auto fields = control->m_fields.self();
+    auto fields = tinker::utils::compat::nodeFields<ICGJRotationControl::Fields>(control);
     fields->m_lastRotation = 0.f;
 }
 
@@ -210,7 +212,7 @@ void ICEditorUI::angleChanged(float angle, bool lock) {
         if (!first) return;
 
         auto control = static_cast<ICGJRotationControl*>(m_rotationControl);
-        auto controlFields = control->m_fields.self();
+        auto controlFields = tinker::utils::compat::nodeFields<ICGJRotationControl::Fields>(control);
 
         if (controlFields->m_lastRotation == 0.f) {
             controlFields->m_lastRotation = angle;
@@ -233,7 +235,7 @@ void ICEditorUI::angleChanged(float angle, bool lock) {
 void ICEditorUI::rotateObjects(cocos2d::CCArray* objects, float rotation, cocos2d::CCPoint pivotPoint, bool lock) {
     auto control = static_cast<ICGJRotationControl*>(m_rotationControl);
 
-    if (control->m_fields->m_rotationLock) {
+    if (tinker::utils::compat::nodeFields<ICGJRotationControl::Fields>(control)->m_rotationLock) {
         EditorUI::rotateObjects(objects, rotation, pivotPoint, lock);
 
         auto fields = m_fields.self();
@@ -983,7 +985,7 @@ float ICGJRotationControl::angleOfPointOnCircle(CCPoint const& point) const {
 
 bool ICGJRotationControl::init() {
     if (!GJRotationControl::init()) return false;
-    auto fields = m_fields.self();
+    auto fields = tinker::utils::compat::nodeFields<Fields>(this);
     
     fields->m_controlContainer = CCNode::create();
     fields->m_controlContainer->setID("controls-container"_spr);
@@ -1154,7 +1156,7 @@ bool ICGJRotationControl::init() {
 bool ICGJRotationControl::ccTouchBegan(cocos2d::CCTouch* touch, cocos2d::CCEvent* event) {
     auto ret = GJRotationControl::ccTouchBegan(touch, event);
 
-    auto fields = m_fields.self();
+    auto fields = tinker::utils::compat::nodeFields<Fields>(this);
 
     if (!nodeIsVisible(fields->m_input) || !alpha::utils::isPointInsideNode(fields->m_input, touch->getLocation())) {
         fields->m_input->unfocus();
@@ -1164,7 +1166,7 @@ bool ICGJRotationControl::ccTouchBegan(cocos2d::CCTouch* touch, cocos2d::CCEvent
 }
 
 void ICGJRotationControl::ccTouchMoved(CCTouch* touch, CCEvent* event) {
-    auto fields = m_fields.self();
+    auto fields = tinker::utils::compat::nodeFields<Fields>(this);
 
     auto delegate = m_delegate;
     m_delegate = nullptr;
@@ -1186,14 +1188,14 @@ void ICGJRotationControl::ccTouchMoved(CCTouch* touch, CCEvent* event) {
 }
 
 void ICGJRotationControl::finishTouch() {
-    auto fields = m_fields.self();
+    auto fields = tinker::utils::compat::nodeFields<Fields>(this);
     fields->m_input->unfocus();
     GJRotationControl::finishTouch();
 }
 
 void ICGJRotationControl::draw() {
     GJRotationControl::draw();
-    auto fields = m_fields.self();
+    auto fields = tinker::utils::compat::nodeFields<Fields>(this);
 
     auto snapSize = fields->m_snapLock ? fields->m_snapSize : 15.f;
 
@@ -1214,7 +1216,7 @@ void ICGJRotationControl::updateScale(bool uiScale, float modifier) {
 }
 
 void ICGJRotationControl::updateUI(bool showRefresh) {
-    auto fields = m_fields.self();
+    auto fields = tinker::utils::compat::nodeFields<Fields>(this);
 
     fields->m_refreshButton->setVisible(showRefresh);
 
@@ -1233,18 +1235,18 @@ void ICGJRotationControl::updateUI(bool showRefresh) {
 }
 
 void ICGJRotationControl::updatePrecision() {
-    auto fields = m_fields.self();
+    auto fields = tinker::utils::compat::nodeFields<Fields>(this);
     fields->m_precision = ImprovedControls::getPrecisionFromString(fields->m_input->getString());
 }
 
 int ICGJRotationControl::getPrecision() {
-    auto fields = m_fields.self();
+    auto fields = tinker::utils::compat::nodeFields<Fields>(this);
     return fields->m_precision;
 }
 
 void ICGJRotationControl::loadValues(CCArray* objects) {
     if (!objects || objects->count() == 0) return;
-    auto fields = m_fields.self();
+    auto fields = tinker::utils::compat::nodeFields<Fields>(this);
     fields->m_objects = objects;
 
     GameObject* parent = nullptr;

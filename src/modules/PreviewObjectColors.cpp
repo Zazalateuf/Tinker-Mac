@@ -7,6 +7,7 @@
 #include <string>
 #include "utils/Constants.hpp"
 #include "utils/Objects.hpp"
+#include "utils/MacCompat.hpp"
 #include "utils/UI.hpp"
 
 using namespace geode::prelude;
@@ -59,7 +60,7 @@ void PreviewObjectColors::onEditor() {
     if (!savedObj.empty()) {
         auto objects = getEditorLayer()->createObjectsFromString(savedObj, true, true);
         fields->m_defaultObject = static_cast<GameObject*>(objects->firstObject());
-        getEditor()->deleteObject(fields->m_defaultObject, true);
+        tinker::utils::compat::deleteObject(getEditor(), fields->m_defaultObject, true);
     }
     else {
         fields->m_defaultObject = GameObject::createWithKey(207);

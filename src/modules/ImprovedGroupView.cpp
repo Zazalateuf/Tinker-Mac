@@ -6,6 +6,7 @@
 #include "alphalaneous.alphas-ui-pack/Utils.hpp"
 #include "ccTypes.h"
 #include <Geode/Geode.hpp>
+#include "utils/MacCompat.hpp"
 #include <alphalaneous.alphas-ui-pack/API.hpp>
 
 using namespace geode::prelude;
@@ -396,7 +397,7 @@ bool IGVSetGroupIDLayer::init(GameObject* obj, cocos2d::CCArray* objs) {
             bg->addChild(label);
 
             if (mode == ImprovedGroupView::GroupMode::Names) {
-                auto name = LevelEditorLayer::get()->m_levelSettings->getIDName(k, 1);
+                auto name = tinker::utils::compat::getIDName(LevelEditorLayer::get()->m_levelSettings, k, 1);
                 GLubyte opacity = 255;
                 float scale = 0.35f;
                 if (name.empty()) {
@@ -511,7 +512,7 @@ ImprovedGroupView::GroupData IGVSetGroupIDLayer::parseObjGroups(GameObject* obj)
 
 bool IGVSetupSpawnPopup::init(EffectGameObject* object, cocos2d::CCArray* objects) {
     if (!SetupSpawnPopup::init(object, objects)) return false;
-    auto fields = m_fields.self();
+    auto fields = tinker::utils::compat::nodeFields<Fields>(this);
     auto winSize = CCDirector::get()->getWinSize();
 
     fields->m_groupView = tinker::ui::GroupView::create({360.f, 90.f}, [this, fields] {
@@ -596,7 +597,7 @@ bool IGVSetupSpawnPopup::init(EffectGameObject* object, cocos2d::CCArray* object
 
                 x = std::max(origIDLabel->getScaledContentWidth(), newIDLabel->getScaledContentWidth()) + 8.f;
 
-                auto name1 = LevelEditorLayer::get()->m_levelSettings->getIDName(entry.groupID, type);
+                auto name1 = tinker::utils::compat::getIDName(LevelEditorLayer::get()->m_levelSettings, entry.groupID, type);
                 GLubyte opacity1 = 255;
                 float scale1 = 0.25f;
                 if (name1.empty()) {
@@ -615,7 +616,7 @@ bool IGVSetupSpawnPopup::init(EffectGameObject* object, cocos2d::CCArray* object
 
                 bg->addChild(origNameLabel);
 
-                auto name2 = LevelEditorLayer::get()->m_levelSettings->getIDName(entry.remapID, type);
+                auto name2 = tinker::utils::compat::getIDName(LevelEditorLayer::get()->m_levelSettings, entry.remapID, type);
                 GLubyte opacity2 = 255;
                 float scale2 = 0.25f;
                 if (name2.empty()) {
@@ -745,7 +746,7 @@ void IGVSetupSpawnPopup::updateRemapButtons(float dt) {
     }
     m_remapButtons->removeAllObjects();
 
-    auto fields = m_fields.self();
+    auto fields = tinker::utils::compat::nodeFields<Fields>(this);
     if (!fields->m_groupView) return;
     fields->m_groupView->generate();
 }
@@ -753,7 +754,7 @@ void IGVSetupSpawnPopup::updateRemapButtons(float dt) {
 bool IGVSetupRandAdvTriggerPopup::init(RandTriggerGameObject* object, cocos2d::CCArray* objects) {
     if (!SetupRandAdvTriggerPopup::init(object, objects)) return false;
 
-    auto fields = m_fields.self();
+    auto fields = tinker::utils::compat::nodeFields<Fields>(this);
     auto winSize = CCDirector::get()->getWinSize();
 
     fields->m_groupView = tinker::ui::GroupView::create({350.f, 90.f}, [this, fields] {
@@ -818,7 +819,7 @@ bool IGVSetupRandAdvTriggerPopup::init(RandTriggerGameObject* object, cocos2d::C
                     chanceText = fmt::format("{}% ({})", percent, obj.m_chance);
                 }
 
-                auto name = LevelEditorLayer::get()->m_levelSettings->getIDName(obj.m_groupID, 1);
+                auto name = tinker::utils::compat::getIDName(LevelEditorLayer::get()->m_levelSettings, obj.m_groupID, 1);
                 GLubyte opacity = 255;
                 float scale = 0.3f;
                 if (name.empty()) {
@@ -923,7 +924,7 @@ bool IGVSetupRandAdvTriggerPopup::init(RandTriggerGameObject* object, cocos2d::C
 }
 
 void IGVSetupRandAdvTriggerPopup::updateGroupIDButtons() {
-    auto fields = m_fields.self();
+    auto fields = tinker::utils::compat::nodeFields<Fields>(this);
     if (!fields->m_groupView) return;
     fields->m_groupView->generate();
 }
@@ -931,7 +932,7 @@ void IGVSetupRandAdvTriggerPopup::updateGroupIDButtons() {
 bool IGVSetupSequenceTriggerPopup::init(SequenceTriggerGameObject* object) {
     if (!SetupSequenceTriggerPopup::init(object)) return false;
 
-    auto fields = m_fields.self();
+    auto fields = tinker::utils::compat::nodeFields<Fields>(this);
     auto winSize = CCDirector::get()->getWinSize();
 
     fields->m_groupView = tinker::ui::GroupView::create({370.f, 76.f}, [this, fields] {
@@ -992,7 +993,7 @@ bool IGVSetupSequenceTriggerPopup::init(SequenceTriggerGameObject* object) {
 
                 bg->addChild(groupLabel);
 
-                auto name = LevelEditorLayer::get()->m_levelSettings->getIDName(obj.m_groupID, 1);
+                auto name = tinker::utils::compat::getIDName(LevelEditorLayer::get()->m_levelSettings, obj.m_groupID, 1);
                 GLubyte opacity = 255;
                 float scale = 0.3f;
                 if (name.empty()) {
@@ -1143,11 +1144,11 @@ void IGVSetupSequenceTriggerPopup::onSelect(cocos2d::CCObject* sender) {
 
 void IGVSetupSequenceTriggerPopup::onDeleteSelected(cocos2d::CCObject* sender) {
     SetupSequenceTriggerPopup::onDeleteSelected(sender);
-    m_fields->m_selectedButton = nullptr;
+    tinker::utils::compat::nodeFields<Fields>(this)->m_selectedButton = nullptr;
 }
 
 void IGVSetupSequenceTriggerPopup::updateGroupIDButtons() {
-    auto fields = m_fields.self();
+    auto fields = tinker::utils::compat::nodeFields<Fields>(this);
     if (!fields->m_groupView) return;
     fields->m_groupView->generate();
 }
