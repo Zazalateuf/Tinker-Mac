@@ -1,0 +1,324 @@
+#include "modules/StatusBar.hpp"
+#include "modules/CustomToolbarBackground.hpp"
+#include "modules/LengthInEditor.hpp"
+#include "modules/UIScaling.hpp"
+#include "third-party/BlurAPI.hpp"
+#include "utils/UI.hpp"
+
+using namespace geode::prelude;
+
+namespace tinker::ui {
+
+StatusBarNode* StatusBarNode::create() {
+    auto ret = new StatusBarNode();
+    if (ret->init()) {
+        ret->autorelease();
+        return ret;
+    }
+    delete ret;
+    return nullptr;
+}
+
+bool StatusBarNode::init() {
+    if (!CCLayerColor::initWithColor({0, 0, 0, 200})) return false;
+
+    auto winSize = CCDirector::get()->getWinSize();
+
+    float horizPadding = 2.f + UIScaling::getSafeOffset().x;
+    float vertPadding = 1.f;
+
+    setContentSize({winSize.width, 8.f});
+    ignoreAnchorPointForPosition(false);
+    setAnchorPoint({0.f, 0.f});
+    setPositionY(-1.f);
+    setZOrder(500);
+    setID("status-bar"_spr);
+
+    setLayout(SimpleRowLayout::create()
+        ->setMainAxisAlignment(MainAxisAlignment::Between)
+        ->setPadding({horizPadding, 0.f, horizPadding, 1.f})
+    );
+    
+    m_leftNode = CCNode::create();
+    m_leftNode->setLayout(SimpleRowLayout::create()
+        ->setMainAxisScaling(AxisScaling::Grow)
+        ->setCrossAxisScaling(AxisScaling::ScaleDown)
+        ->setMinRelativeScale(std::nullopt)
+        ->setGap(5.f)
+    );
+    m_leftNode->setAnchorPoint({0.f, 0.f});
+    m_leftNode->setZOrder(1);
+    m_leftNode->setContentHeight(getContentHeight() - 1.f - vertPadding * 2.f);
+    m_leftNode->setID("left-container"_spr);
+
+    m_rightNode = CCNode::create();
+    m_rightNode->setLayout(SimpleRowLayout::create()
+        ->setMainAxisScaling(AxisScaling::Grow)
+        ->setCrossAxisScaling(AxisScaling::ScaleDown)
+        ->setMinRelativeScale(std::nullopt)
+        ->setMainAxisDirection(AxisDirection::RightToLeft)
+        ->setGap(5.f)
+    );
+    m_rightNode->setAnchorPoint({1.f, 0.f});
+    m_rightNode->setZOrder(2);
+    m_rightNode->setContentHeight(getContentHeight() - 1.f - vertPadding * 2.f);
+    m_rightNode->setID("right-container"_spr);
+
+    addChild(m_leftNode);
+    addChild(m_rightNode);
+
+    auto objectLayer = LevelEditorLayer::get()->m_objectLayer;
+
+    auto zoomLabel = addLabel("zoom-label"_spr, 0, false);
+
+    zoomLabel->addEventListener(EditorZoomEvent(), [this, zoomLabel] (float zoom) {
+        zoomLabel->setText(fmt::format("Zoom: {}", numToString(zoom, 2)));
+        zoomLabel->validate();
+
+        m_leftNode->updateLayout();
+        updateLayout();
+    });
+
+    zoomLabel->setText(fmt::format("Zoom: {}", numToString(objectLayer->getScale(), 2)));
+    zoomLabel->validate();
+
+    auto positionLabel = addLabel("position-label"_spr, 100, false);
+
+    positionLabel->addEventListener(EditorMoveEvent(), [this, positionLabel] (CCPoint position) {
+        auto winSize = CCDirector::get()->getWinSize();
+        auto objectLayer = LevelEditorLayer::get()->m_objectLayer;
+
+        auto screenCenter = CCPoint{winSize.width * 0.5f, winSize.height * 0.5f};
+        auto pivotInObject = objectLayer->convertToNodeSpace(screenCenter);
+        auto lineScreenPos = CCPoint{winSize.width * 0.5f, (winSize.height + tinker::utils::ui::getToolbarHeight()) * 0.5f};
+        auto linePosInObject = objectLayer->convertToNodeSpace(lineScreenPos);
+        
+        positionLabel->setText(fmt::format("Pos: ({}, {})", numToString(linePosInObject.x, 2), numToString(linePosInObject.y - 90.f, 2)));
+        positionLabel->validate();
+
+        updateLayouts();
+    });
+
+    auto screenCenter = CCPoint{winSize.width * 0.5f, winSize.height * 0.5f};
+    auto pivotInObject = objectLayer->convertToNodeSpace(screenCenter);
+    auto lineScreenPos = CCPoint{winSize.width * 0.5f, (winSize.height + tinker::utils::ui::getToolbarHeight()) * 0.5f};
+    auto linePosInObject = objectLayer->convertToNodeSpace(lineScreenPos);
+
+    positionLabel->setText(fmt::format("Pos: ({}, {})", numToString(linePosInObject.x, 2), numToString(linePosInObject.y - 90.f, 2)));
+    positionLabel->validate();
+
+    auto objectsLabel = addLabel("objects-label"_spr, 0, true);
+
+    objectsLabel->addEventListener(ObjectChangeEvent(), [this, objectsLabel] (float lastObjectX) {
+        objectsLabel->setText(fmt::format("Objects: {}", LevelEditorLayer::get()->m_objectCount));
+        objectsLabel->validate();
+
+        updateLayouts();
+    });
+    objectsLabel->setText(fmt::format("Objects: {}", LevelEditorLayer::get()->m_objectCount));
+    objectsLabel->validate();
+
+    auto activeLabel = addLabel("active-label"_spr, 100, true);
+
+    activeLabel->addEventListener(ActiveObjectsChangedEvent(), [this, activeLabel] (int count) {
+        activeLabel->setText(fmt::format("Active: {}", count));
+        activeLabel->validate();
+
+        updateLayouts();
+    });
+    activeLabel->setText(fmt::format("Active: {}", LevelEditorLayer::get()->m_activeObjectsCount));
+    activeLabel->validate();
+
+    auto lengthLabel = addLabel("length-label"_spr, 200, true);
+
+    lengthLabel->addEventListener(ObjectChangeEvent(), [this, lengthLabel] (float lastObjectX) {
+        lengthLabel->setText(fmt::format("Length: {}", LengthInEditor::getTime(lastObjectX)));
+        lengthLabel->validate();
+
+        updateLayouts();
+    });
+
+    lengthLabel->addEventListener(ObjectMovedEvent(), [this, lengthLabel] () {
+        lengthLabel->setText(fmt::format("Length: {}", LengthInEditor::getTime(LevelEditorLayer::get()->getLastObjectX())));
+        lengthLabel->validate();
+
+        updateLayouts();
+    });
+
+    lengthLabel->setText(fmt::format("Length: {}", LengthInEditor::getTime(LevelEditorLayer::get()->getLastObjectX())));
+    lengthLabel->validate();
+
+    m_leftNode->updateLayout();
+    m_rightNode->updateLayout();
+
+    updateLayout();
+
+    //schedule(schedule_selector(StatusBar::checkTime));
+
+    return true;
+}
+
+geode::Label* StatusBarNode::addLabel(ZStringView id, int idx, bool right) {
+    auto label = geode::Label::create("", "chatFont.fnt");
+    label->setAlignment(right ? geode::Label::Alignment::Right : geode::Label::Alignment::Left);
+    label->validate();
+    label->setID(id);
+    label->setZOrder(idx);
+
+    auto node = right ? m_rightNode : m_leftNode;
+    node->removeChildByID(id);
+    node->addChild(label);
+
+    return label;
+}
+
+void StatusBarNode::checkTime(float dt) {
+    auto editor = LevelEditorLayer::get();
+
+    log::info("time: {}", editor->m_drawGridLayer->m_musicTime);
+}
+
+void StatusBarNode::updateLayouts() {
+    m_leftNode->updateLayout();
+    m_rightNode->updateLayout();
+
+    updateLayout();
+}
+
+};
+
+bool StatusBar::onToggled(bool state) {
+    if (state) {
+        onEditor();
+    }
+    else {
+        if (m_statusBar) {
+            m_statusBar->removeFromParent();
+            getEditor()->m_uiItems->removeObject(m_statusBar);
+            m_statusBar = nullptr;
+        }
+        m_toolbarOffset = 0.f;
+
+        removeEventListener("ui-scale");
+    }
+
+    getEditor()->runAction(CallFuncExt::create([this] {
+        UIScaling::get()->setScaling();
+    }));
+
+    return true;
+}
+
+void StatusBar::onEditor() {
+    auto editor = getEditor();
+
+    addEventListener("ui-scale", PreUIScaleUpdated(), [this] (float scale, bool scaleToolbars) {
+        updateUI(scale);
+    });
+
+    m_statusBar = tinker::ui::StatusBarNode::create();
+
+    editor->m_uiItems->addObject(m_statusBar);
+
+    if (CustomToolbarBackground::isEnabled()) {
+        auto blur = CustomToolbarBackground::getSetting<bool, "blur-behind">();
+        if (blur) {
+	        BlurAPI::addBlur(m_statusBar);
+        }   
+    }
+
+    updateUI(UIScaling::getToolbarScale());
+
+    StatusBarCreatedEvent().send();
+}
+
+geode::Label* StatusBar::addLabel(ZStringView id, int idx, bool right) {
+    if (!m_statusBar) return nullptr;
+    return m_statusBar->addLabel(id, idx, right);
+}
+
+void StatusBar::updateLayouts() {
+    m_statusBar->updateLayouts();
+}
+
+void StatusBar::updateUI(float scale) {
+    auto editor = getEditor();
+    if (scale > 0.9f) {
+        m_toolbarOffset = 0.f;
+        m_statusBar->removeFromParent();
+        return;
+    }
+
+    float horizPadding = 2.f + UIScaling::getSafeOffset().x;
+    float vertPadding = 1.f;
+    
+    m_statusBar->setLayout(SimpleRowLayout::create()
+        ->setMainAxisAlignment(MainAxisAlignment::Between)
+        ->setPadding({horizPadding, 0.f, horizPadding, 1.f})
+    );
+
+    m_toolbarOffset = m_statusBar->getContentHeight();
+
+    if (!m_statusBar->getParent()) {
+        editor->addChild(m_statusBar);
+        StatusBarCreatedEvent().send();
+    }
+
+    m_statusBar->updateLayouts();
+
+    if (m_updatingUI) return;
+
+    m_updatingUI = true;
+    editor->runAction(CallFuncExt::create([this] {
+        adjustPositions();
+        m_updatingUI = false;
+    }));
+}
+
+void StatusBar::adjustPositions() {
+    auto editor = getEditor();
+    auto toolbarCategoriesMenu = editor->getChildByID("toolbar-categories-menu");
+    auto spacerLineLeft = editor->getChildByID("spacer-line-left");
+    auto objectGroupsGotoMenu = editor->getChildByID("razoom.object_groups/goto_obj_menu");
+    auto toolbarTogglesMenu = editor->getChildByID("toolbar-toggles-menu");
+    auto spacerLineRight = editor->getChildByID("spacer-line-right");
+    auto objectGroupsToggleMenu = editor->getChildByID("razoom.object_groups/toggle_menu");
+    auto toolbarBackground = editor->getChildByID("background-sprite");
+    auto buildTabsMenu = editor->getChildByID("build-tabs-menu");
+
+    if (toolbarCategoriesMenu) {
+        toolbarCategoriesMenu->setPositionY(toolbarCategoriesMenu->getPositionY() + m_toolbarOffset);
+    }
+    if (spacerLineLeft) {
+        spacerLineLeft->setPositionY(spacerLineLeft->getPositionY() + m_toolbarOffset);
+    }
+    if (objectGroupsGotoMenu) {
+        objectGroupsGotoMenu->setPositionY(objectGroupsGotoMenu->getPositionY() + m_toolbarOffset);
+    }
+    if (toolbarTogglesMenu) {
+        toolbarTogglesMenu->setPositionY(toolbarTogglesMenu->getPositionY() + m_toolbarOffset);
+    }
+    if (spacerLineRight) {
+        spacerLineRight->setPositionY(spacerLineRight->getPositionY() + m_toolbarOffset);
+    }
+    if (objectGroupsToggleMenu) {
+        objectGroupsToggleMenu->setPositionY(objectGroupsToggleMenu->getPositionY() + m_toolbarOffset);
+    }
+    if (toolbarBackground) {
+        toolbarBackground->setPositionY(toolbarBackground->getPositionY() + m_toolbarOffset);
+    }
+    if (buildTabsMenu) {
+        buildTabsMenu->setPositionY(buildTabsMenu->getPositionY() + m_toolbarOffset);
+    }
+
+    for (auto c : editor->getChildrenExt()) {
+        if (auto bar = typeinfo_cast<EditButtonBar*>(c)) {
+            float y = 0.f;
+            if (StatusBar::isEnabled()) {
+                y = StatusBar::get()->m_toolbarOffset;
+            }
+
+            bar->setPositionY(y);
+        }
+    }
+}
